@@ -1,0 +1,16 @@
+{
+  "company": "1031 Exchange Denver",
+  "phone": "",
+  "phoneDigits": "",
+  "mainCity": "Denver",
+  "state": "CO",
+  "services": [],
+  "servicesNav": [],
+  "locationsNav": [],
+  "extraLinks": [
+    {
+      "label": "Contact",
+      "href": "/contact"
+    }
+  ]
+}
