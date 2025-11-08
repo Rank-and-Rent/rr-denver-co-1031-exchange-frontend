@@ -1,36 +1,19 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 1031 Exchange Denver Frontend
 
-## Getting Started
+## Taxonomy Rationale
 
-First, run the development server:
+This site uses a comprehensive taxonomy designed to support nationwide replacement property identification for 1031 exchanges. The taxonomy includes:
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+**Services (26 items)** organized into seven categories: Timelines, Structures, Execution, Tax, Reporting, Property Paths, and Education. Services prioritize replacement property identification first, with intermediary and compliance support as secondary services. The taxonomy covers asset type discovery across multifamily, industrial, retail, medical office, self storage, NNN, STNL, flex, hospitality, land, and mixed use properties. It includes timeline control, identification strategies, three property and two hundred percent rule paths, reverse and improvement exchange options, and DST placement coordination. Planning and underwriting support topics include rent roll checks, T12 review, capex planning, market comp pulls, and lender preflight.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+**Property Types (11 items)** suited for 1031 exchanges including multifamily, industrial, retail, medical office, self storage, NNN, STNL, flex, hospitality, land, and mixed use. Each property type has a dedicated inventory category with nationwide sourcing capabilities.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+**Locations (21 items)** including Denver and surrounding neighborhoods, suburbs, and nearby cities within 30-45 miles of Denver. Locations include Cherry Creek, Downtown Denver, Tech Center, Highlands, Boulder, Colorado Springs, Fort Collins, and Denver metro suburbs. A remote location supports nationwide coordination.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+**Inventory Categories** aligned to property types at `/inventory/[slug]` with spotlight cards for each category. Inventory supports nationwide replacement property identification with property summaries, financial analysis, and identification coordination.
 
-## Learn More
+**Resources** include IRS Like Kind rules, IRS Form 8824, Rev Proc 2008-16, and Colorado transfer tax links. Resources support educational content and compliance documentation.
 
-To learn more about Next.js, take a look at the following resources:
+**Layout Variants** provide six service variants and six location variants with round robin assignment to ensure layout diversity across pages. Variants include classic, detailed, focused, comparison, process, and minimal layouts for services, and map-first, overview, focused, market, guide, and compact layouts for locations.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+This taxonomy supports the site's primary goal of nationwide replacement property identification while maintaining Denver, CO as the primary market with local coordination and expertise.
