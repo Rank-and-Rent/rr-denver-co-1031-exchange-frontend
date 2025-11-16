@@ -50,6 +50,17 @@ export default function Header() {
     return () => window.removeEventListener("keydown", handler);
   }, []);
 
+  useEffect(() => {
+    if (mobileOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [mobileOpen]);
+
   const handleMenuToggle = (menu: MenuKey) => {
     setOpenMenu((current) => (current === menu ? null : menu));
   };
@@ -71,7 +82,7 @@ export default function Header() {
 
   return (
     <header className="sticky top-0 z-50 border-b border-white/5 bg-slate-950/90 backdrop-blur supports-[backdrop-filter]:bg-slate-950/70">
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-1 lg:px-8">
+      <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 lg:px-8 lg:py-4">
         <div className="flex items-center gap-3">
           <Link href="/" className="flex items-center gap-2">
             <Image
@@ -285,7 +296,7 @@ export default function Header() {
       <div
         id="mobile-menu"
         className={clsx(
-          "border-t border-white/5 bg-slate-950/95 px-4 pb-6 pt-2 text-white lg:hidden",
+          "border-t border-white/5 bg-slate-950/95 px-4 pb-6 pt-2 text-white lg:hidden overflow-y-auto max-h-[calc(100vh-80px)]",
           mobileOpen ? "block" : "hidden"
         )}
       >
