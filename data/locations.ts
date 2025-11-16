@@ -1,0 +1,141 @@
+import type { LocationItem } from "./types";
+
+export const locationsData: LocationItem[] = [
+  {
+    slug: "denver",
+    name: "Denver",
+    route: "denver",
+    type: "city",
+  },
+  {
+    slug: "cherry-creek",
+    name: "Cherry Creek",
+    parent: "denver",
+    route: "cherry-creek",
+    type: "neighborhood",
+  },
+  {
+    slug: "downtown-denver",
+    name: "Downtown Denver",
+    parent: "denver",
+    route: "downtown-denver",
+    type: "district",
+  },
+  {
+    slug: "tech-center",
+    name: "Denver Tech Center",
+    parent: "denver",
+    route: "tech-center",
+    type: "district",
+  },
+  {
+    slug: "highlands",
+    name: "Highlands",
+    parent: "denver",
+    route: "highlands",
+    type: "neighborhood",
+  },
+  {
+    slug: "boulder",
+    name: "Boulder",
+    route: "boulder",
+    type: "city",
+  },
+  {
+    slug: "colorado-springs",
+    name: "Colorado Springs",
+    route: "colorado-springs",
+    type: "city",
+  },
+  {
+    slug: "fort-collins",
+    name: "Fort Collins",
+    route: "fort-collins",
+    type: "city",
+  },
+  {
+    slug: "arvada",
+    name: "Arvada",
+    route: "arvada",
+    type: "suburb",
+  },
+  {
+    slug: "lakewood",
+    name: "Lakewood",
+    route: "lakewood",
+    type: "suburb",
+  },
+  {
+    slug: "westminster",
+    name: "Westminster",
+    route: "westminster",
+    type: "suburb",
+  },
+  {
+    slug: "thornton",
+    name: "Thornton",
+    route: "thornton",
+    type: "suburb",
+  },
+  {
+    slug: "aurora",
+    name: "Aurora",
+    route: "aurora",
+    type: "suburb",
+  },
+  {
+    slug: "parker",
+    name: "Parker",
+    route: "parker",
+    type: "suburb",
+  },
+  {
+    slug: "littleton",
+    name: "Littleton",
+    route: "littleton",
+    type: "suburb",
+  },
+  {
+    slug: "englewood",
+    name: "Englewood",
+    route: "englewood",
+    type: "suburb",
+  },
+  {
+    slug: "wheat-ridge",
+    name: "Wheat Ridge",
+    route: "wheat-ridge",
+    type: "suburb",
+  },
+  {
+    slug: "golden",
+    name: "Golden",
+    route: "golden",
+    type: "suburb",
+  },
+  {
+    slug: "broomfield",
+    name: "Broomfield",
+    route: "broomfield",
+    type: "suburb",
+  },
+  {
+    slug: "commerce-city",
+    name: "Commerce City",
+    route: "commerce-city",
+    type: "suburb",
+  },
+  {
+    slug: "northglenn",
+    name: "Northglenn",
+    route: "northglenn",
+    type: "suburb",
+  },
+  {
+    slug: "remote",
+    name: "Remote",
+    route: "remote",
+    type: "remote",
+  },
+];
+
