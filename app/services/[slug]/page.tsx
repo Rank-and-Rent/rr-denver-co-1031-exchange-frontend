@@ -9,6 +9,7 @@ import BottomCTA from "@/components/BottomCTA";
 import { LeadForm } from "@/components/LeadForm";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { RelatedServiceGrid } from "@/components/services/RelatedServiceGrid";
+import { getServiceBatch } from "@/lib/batch-loader";
 import {
   BRAND_NAME,
   PRIMARY_CITY,
@@ -56,6 +57,9 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
     notFound();
   }
 
+  // Get rich content from batch data
+  const batchContent = getServiceBatch(slug);
+
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "Service",
@@ -80,7 +84,8 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
     .filter((s) => s.slug !== service.slug && s.category === service.category)
     .slice(0, 4);
 
-  const faqs = [
+  // Use batch FAQs if available, otherwise use defaults
+  const faqs = batchContent?.faqs || [
     {
       question: `How does this service support ${PRIMARY_CITY}?`,
       answer: `${service.name} keeps ${PRIMARY_CITY}, ${PRIMARY_STATE_ABBR} exchanges aligned with local lending, intermediary, and attorney requirements so deadlines never drift.`,
@@ -128,8 +133,28 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
           </div>
         </section>
 
+        {/* Main Description Section */}
+        {batchContent?.mainDescription && (
+          <section className="py-16 md:py-24">
+            <div className="mx-auto max-w-7xl px-6 md:px-8">
+              <div className="mx-auto max-w-4xl">
+                <p className="text-xs font-medium uppercase tracking-[0.2em] text-warm-brown">
+                  Service Overview
+                </p>
+                <h2 className={`mt-4 text-3xl text-gray-900 ${playfair.className}`}>
+                  How this service works
+                </h2>
+                <div 
+                  className="mt-6 prose prose-lg max-w-none text-gray-700 leading-relaxed"
+                  dangerouslySetInnerHTML={{ __html: batchContent.mainDescription }}
+                />
+              </div>
+            </div>
+          </section>
+        )}
+
         {/* What's Included Section */}
-        <section className="py-16 md:py-24">
+        <section className="bg-cream py-16 md:py-24">
           <div className="mx-auto max-w-7xl px-6 md:px-8">
             <div className="grid gap-12 lg:grid-cols-2">
               <div>
@@ -140,19 +165,21 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
                   What is included
                 </h2>
                 <p className="mt-4 text-gray-600 leading-relaxed">
-                  This service keeps your exchange aligned with IRS guidance and the
-                  lender, intermediary, and attorney teams supporting you.
+                  {batchContent ? 
+                    "Comprehensive support to keep your exchange compliant and on schedule." :
+                    "This service keeps your exchange aligned with IRS guidance and the lender, intermediary, and attorney teams supporting you."
+                  }
                 </p>
               </div>
               <div className="space-y-4">
-                {[
+                {(batchContent?.inclusions || [
                   "Intake review covering gain, basis, and financing targets.",
                   "Calendar control for the 45 day identification and 180 day close.",
                   "Secure document exchange for intermediaries, attorneys, and lenders.",
-                ].map((item, index) => (
-                  <div key={index} className="flex gap-4 bg-cream p-6">
+                ]).map((item, index) => (
+                  <div key={index} className="flex gap-4 bg-white p-6">
                     <span className={`text-2xl font-light text-warm-brown/40 ${playfair.className}`}>
-                      0{index + 1}
+                      {String(index + 1).padStart(2, '0')}
                     </span>
                     <p className="text-gray-700">{item}</p>
                   </div>
@@ -161,6 +188,86 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
             </div>
           </div>
         </section>
+
+        {/* Common Situations Section */}
+        {batchContent?.commonSituations && batchContent.commonSituations.length > 0 && (
+          <section className="py-16 md:py-24">
+            <div className="mx-auto max-w-7xl px-6 md:px-8">
+              <div className="text-center mb-12">
+                <p className="text-xs font-medium uppercase tracking-[0.3em] text-warm-brown">
+                  Common Scenarios
+                </p>
+                <h2 className={`mt-4 text-3xl text-gray-900 ${playfair.className}`}>
+                  When this service helps
+                </h2>
+              </div>
+              <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 max-w-6xl mx-auto">
+                {batchContent.commonSituations.map((situation, index) => (
+                  <div key={index} className="bg-cream p-6">
+                    <div className="mb-4">
+                      <span className={`text-5xl font-light text-warm-brown/20 ${playfair.className}`}>
+                        {String(index + 1).padStart(2, '0')}
+                      </span>
+                    </div>
+                    <p className="text-sm text-gray-700 leading-relaxed">{situation}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </section>
+        )}
+
+        {/* Example Capability Section */}
+        {batchContent?.exampleCapability && (
+          <section className="bg-warm-brown/5 py-16 md:py-24">
+            <div className="mx-auto max-w-4xl px-6 md:px-8">
+              <div className="text-center mb-12">
+                <p className="text-xs font-medium uppercase tracking-[0.3em] text-warm-brown">
+                  Example Project
+                </p>
+                <h2 className={`mt-4 text-3xl text-gray-900 ${playfair.className}`}>
+                  {batchContent.exampleCapability.serviceType}
+                </h2>
+                <p className="mt-2 text-sm text-gray-600">
+                  {batchContent.exampleCapability.disclaimer}
+                </p>
+              </div>
+              <div className="space-y-8 bg-white p-8 md:p-12">
+                <div>
+                  <h3 className="text-sm font-semibold uppercase tracking-[0.2em] text-warm-brown mb-3">
+                    Client Situation
+                  </h3>
+                  <p className="text-gray-700 leading-relaxed">
+                    {batchContent.exampleCapability.clientSituation}
+                  </p>
+                </div>
+                <div>
+                  <h3 className="text-sm font-semibold uppercase tracking-[0.2em] text-warm-brown mb-3">
+                    Our Approach
+                  </h3>
+                  <p className="text-gray-700 leading-relaxed">
+                    {batchContent.exampleCapability.ourApproach}
+                  </p>
+                </div>
+                <div>
+                  <h3 className="text-sm font-semibold uppercase tracking-[0.2em] text-warm-brown mb-3">
+                    Expected Outcome
+                  </h3>
+                  <p className="text-gray-700 leading-relaxed">
+                    {batchContent.exampleCapability.expectedOutcome}
+                  </p>
+                </div>
+                {batchContent.complianceNote && (
+                  <div className="border-l-4 border-warm-brown bg-cream p-6 mt-8">
+                    <p className="text-sm text-gray-700">
+                      {batchContent.complianceNote}
+                    </p>
+                  </div>
+                )}
+              </div>
+            </div>
+          </section>
+        )}
 
         {/* Related Services */}
         <section className="bg-cream py-16 md:py-24">

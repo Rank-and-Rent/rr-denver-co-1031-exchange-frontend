@@ -10,6 +10,7 @@ import { propertyTypesData } from "@/data/property-types";
 import BottomCTA from "@/components/BottomCTA";
 import { LeadForm } from "@/components/LeadForm";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
+import { getLocationBatch } from "@/lib/batch-loader";
 import {
   BRAND_NAME,
   PRIMARY_PHONE_DISPLAY,
@@ -58,6 +59,9 @@ export default async function LocationPage({ params }: { params: Promise<{ slug:
 
   const parentLocation = location.parent ? locationsData.find((l) => l.slug === location.parent) : null;
 
+  // Get rich content from batch data
+  const batchContent = getLocationBatch(slug);
+
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
@@ -77,7 +81,8 @@ export default async function LocationPage({ params }: { params: Promise<{ slug:
     .filter((service) => service.category === "Property Paths")
     .slice(0, 4);
 
-  const faqs = [
+  // Use batch FAQs if available, otherwise use defaults
+  const faqs = batchContent?.faqs || [
     {
       question: `How fast can you mobilize in ${location.name}?`,
       answer: `We stage intake calls within one business day for ${location.name}, ${PRIMARY_STATE_ABBR} investors and begin property matching once debt and equity targets are confirmed.`,
@@ -143,8 +148,122 @@ export default async function LocationPage({ params }: { params: Promise<{ slug:
           </div>
         </section>
 
+        {/* Main Description Section */}
+        {batchContent?.mainDescription && (
+          <section className="py-16 md:py-24">
+            <div className="mx-auto max-w-7xl px-6 md:px-8">
+              <div className="mx-auto max-w-4xl">
+                <p className="text-xs font-medium uppercase tracking-[0.2em] text-warm-brown">
+                  About {location.name}
+                </p>
+                <h2 className={`mt-4 text-3xl text-gray-900 ${playfair.className}`}>
+                  1031 Exchange Services in {location.name}
+                </h2>
+                <div 
+                  className="mt-6 prose prose-lg max-w-none text-gray-700 leading-relaxed"
+                  dangerouslySetInnerHTML={{ __html: batchContent.mainDescription }}
+                />
+              </div>
+            </div>
+          </section>
+        )}
+
+        {/* Popular Paths Section */}
+        {batchContent?.popularPaths && batchContent.popularPaths.length > 0 && (
+          <section className="bg-cream py-16 md:py-24">
+            <div className="mx-auto max-w-7xl px-6 md:px-8">
+              <div className="text-center mb-12">
+                <p className="text-xs font-medium uppercase tracking-[0.3em] text-warm-brown">
+                  Popular in {location.name}
+                </p>
+                <h2 className={`mt-4 text-3xl text-gray-900 ${playfair.className}`}>
+                  Most requested services and property types
+                </h2>
+              </div>
+              <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 max-w-6xl mx-auto">
+                {batchContent.popularPaths.map((path) => {
+                  const href = path.type === 'service' ? `/services/${path.slug}` : `/property-types/${path.slug}`;
+                  return (
+                    <Link
+                      key={path.slug}
+                      href={href}
+                      className="group bg-white p-6 transition-all hover:bg-warm-brown"
+                    >
+                      <div className="flex items-start justify-between mb-4">
+                        <span className={`text-4xl font-light text-warm-brown/30 group-hover:text-white/30 ${playfair.className}`}>
+                          {String(path.rank).padStart(2, '0')}
+                        </span>
+                        <span className="text-xs uppercase tracking-[0.2em] text-gray-500 group-hover:text-white/70">
+                          {path.type}
+                        </span>
+                      </div>
+                      <h3 className={`text-xl text-gray-900 group-hover:text-white ${playfair.className}`}>
+                        {path.name}
+                      </h3>
+                      <p className="mt-3 text-sm text-gray-600 group-hover:text-white/80">
+                        {path.whyPopular}
+                      </p>
+                      <span className="mt-4 inline-flex items-center gap-2 text-xs font-medium uppercase tracking-[0.15em] text-warm-brown group-hover:text-white">
+                        Explore
+                        <svg className="h-4 w-4 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                        </svg>
+                      </span>
+                    </Link>
+                  );
+                })}
+              </div>
+            </div>
+          </section>
+        )}
+
+        {/* Example Capability Section */}
+        {batchContent?.exampleCapability && (
+          <section className="py-16 md:py-24">
+            <div className="mx-auto max-w-4xl px-6 md:px-8">
+              <div className="text-center mb-12">
+                <p className="text-xs font-medium uppercase tracking-[0.3em] text-warm-brown">
+                  Example Project
+                </p>
+                <h2 className={`mt-4 text-3xl text-gray-900 ${playfair.className}`}>
+                  {location.name} Exchange Coordination
+                </h2>
+                <p className="mt-2 text-sm text-gray-600">
+                  {batchContent.exampleCapability.disclaimer}
+                </p>
+              </div>
+              <div className="space-y-8 bg-cream p-8 md:p-12">
+                <div>
+                  <h3 className="text-sm font-semibold uppercase tracking-[0.2em] text-warm-brown mb-3">
+                    Situation
+                  </h3>
+                  <p className="text-gray-700 leading-relaxed">
+                    {batchContent.exampleCapability.situation}
+                  </p>
+                </div>
+                <div>
+                  <h3 className="text-sm font-semibold uppercase tracking-[0.2em] text-warm-brown mb-3">
+                    Our Approach
+                  </h3>
+                  <p className="text-gray-700 leading-relaxed">
+                    {batchContent.exampleCapability.ourApproach}
+                  </p>
+                </div>
+                <div>
+                  <h3 className="text-sm font-semibold uppercase tracking-[0.2em] text-warm-brown mb-3">
+                    Expected Outcome
+                  </h3>
+                  <p className="text-gray-700 leading-relaxed">
+                    {batchContent.exampleCapability.expectedOutcome}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </section>
+        )}
+
         {/* Featured Services Section */}
-        <section className="py-16 md:py-24">
+        <section className="bg-white py-16 md:py-24">
           <div className="mx-auto max-w-7xl px-6 md:px-8">
             <div className="mb-12">
               <p className="text-xs font-medium uppercase tracking-[0.2em] text-warm-brown">

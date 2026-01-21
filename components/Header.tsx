@@ -117,7 +117,6 @@ export default function Header() {
             className="relative"
             onMouseEnter={() => setOpenMenu("services")}
             onMouseLeave={() => setOpenMenu(null)}
-            onFocus={() => setOpenMenu("services")}
             onBlur={handleBlur}
           >
             <button
@@ -126,7 +125,7 @@ export default function Header() {
               aria-haspopup="true"
               aria-expanded={openMenu === "services"}
               aria-controls="services-menu"
-              onClick={() => handleMenuToggle("services")}
+              onFocus={() => setOpenMenu("services")}
             >
               Services
               <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -176,7 +175,6 @@ export default function Header() {
             className="relative"
             onMouseEnter={() => setOpenMenu("locations")}
             onMouseLeave={() => setOpenMenu(null)}
-            onFocus={() => setOpenMenu("locations")}
             onBlur={handleBlur}
           >
             <button
@@ -185,7 +183,7 @@ export default function Header() {
               aria-haspopup="true"
               aria-expanded={openMenu === "locations"}
               aria-controls="locations-menu"
-              onClick={() => handleMenuToggle("locations")}
+              onFocus={() => setOpenMenu("locations")}
             >
               Locations
               <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -235,7 +233,6 @@ export default function Header() {
             className="relative"
             onMouseEnter={() => setOpenMenu("tools")}
             onMouseLeave={() => setOpenMenu(null)}
-            onFocus={() => setOpenMenu("tools")}
             onBlur={handleBlur}
           >
             <button
@@ -244,7 +241,7 @@ export default function Header() {
               aria-haspopup="true"
               aria-expanded={openMenu === "tools"}
               aria-controls="tools-menu"
-              onClick={() => handleMenuToggle("tools")}
+              onFocus={() => setOpenMenu("tools")}
             >
               Tools
               <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
