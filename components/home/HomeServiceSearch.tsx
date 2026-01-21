@@ -53,11 +53,11 @@ export function HomeServiceSearch({ services, featured }: HomeServiceSearchProps
     <div className="space-y-6">
       <form
         onSubmit={handleSubmit}
-        className="flex flex-col gap-3 rounded-3xl border border-white/10 bg-white/5 p-4"
+        className="flex flex-col gap-3 rounded-3xl border border-gray-300 bg-gray-50 p-4"
       >
         <label
           htmlFor="home-service-search"
-          className="text-xs font-semibold uppercase tracking-[0.3em] text-amber-300"
+          className="text-xs font-semibold uppercase tracking-[0.3em] text-warm-brown"
         >
           Search services
         </label>
@@ -67,11 +67,11 @@ export function HomeServiceSearch({ services, featured }: HomeServiceSearchProps
             value={query}
             onChange={(event) => setQuery(event.target.value)}
             placeholder="Timeline tracking, replacement sourcing..."
-            className="flex-1 rounded-2xl border border-white/10 bg-slate-950/40 px-4 py-3 text-sm text-white placeholder:text-slate-500 focus:border-amber-300 focus:outline-none focus:ring-2 focus:ring-amber-200/40"
+            className="flex-1 rounded-2xl border border-gray-300 bg-white px-4 py-3 text-sm text-gray-900 placeholder:text-gray-500 focus:border-warm-brown focus:outline-none focus:ring-2 focus:ring-warm-brown/20"
           />
           <button
             type="submit"
-            className="rounded-2xl bg-amber-300 px-4 py-3 text-xs font-semibold uppercase tracking-[0.3em] text-slate-900"
+            className="rounded-2xl bg-warm-brown px-4 py-3 text-xs font-semibold uppercase tracking-[0.3em] text-white transition hover:bg-dark-brown"
           >
             Go
           </button>
@@ -82,13 +82,13 @@ export function HomeServiceSearch({ services, featured }: HomeServiceSearchProps
           <Link
             key={service.slug}
             href={`/services/${service.slug}`}
-            className="flex h-full flex-col rounded-3xl border border-white/10 bg-white/5 p-6 text-left text-slate-200 transition hover:-translate-y-1 hover:border-amber-200/50 hover:bg-white/10"
+            className="flex h-full flex-col rounded-3xl border border-gray-200 bg-white p-6 text-left transition hover:-translate-y-1 hover:border-warm-brown hover:shadow-lg"
           >
-            <h3 className="text-lg font-semibold text-white">
+            <h3 className="text-lg font-semibold text-gray-900">
               {service.title}
             </h3>
-            <p className="mt-2 text-sm text-slate-300">{service.description}</p>
-            <span className="mt-auto pt-4 text-xs font-semibold uppercase tracking-[0.28em] text-amber-300">
+            <p className="mt-2 text-sm text-gray-700">{service.description}</p>
+            <span className="mt-auto pt-4 text-xs font-semibold uppercase tracking-[0.28em] text-warm-brown">
               View service
             </span>
           </Link>
