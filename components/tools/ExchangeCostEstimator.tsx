@@ -99,142 +99,135 @@ export default function ExchangeCostEstimator() {
   }> = [
     {
       key: "propertyValue",
-      label: "Property value ($)",
+      label: "Property Value ($)",
       helper: "Estimated purchase price of the Houston replacement property.",
       placeholder: "1,000,000",
     },
     {
       key: "qiFeePercentage",
-      label: "QI fee percentage (%)",
+      label: "QI Fee Percentage (%)",
       helper: "Typical Houston rates range from 0.5% to 1.5%.",
       placeholder: "1",
     },
     {
       key: "escrowFee",
-      label: "Escrow fee ($)",
+      label: "Escrow Fee ($)",
       helper: "Flat fee charged by the escrow or title company.",
       placeholder: "1,500",
     },
     {
       key: "titleInsuranceRate",
-      label: "Title insurance rate (%)",
+      label: "Title Insurance Rate (%)",
       helper: "Texas promulgated rates often range near 0.5%.",
       placeholder: "0.5",
     },
     {
       key: "recordingFees",
-      label: "Harris County recording fees ($)",
+      label: "Harris County Recording Fees ($)",
       helper: "Most filings fall between $275 - $525.",
       placeholder: "500",
     },
   ];
 
   return (
-    <div className="tool-card space-y-8 rounded-3xl border border-white/10 bg-white/5 p-6 text-white shadow-2xl">
+    <div className="space-y-8 bg-cream p-8">
       <div>
-        <h2 className="text-2xl font-semibold text-white">Cost inputs</h2>
-        <p className="text-sm text-slate-300">
+        <h2 className="text-2xl font-medium text-warm-brown">Cost Inputs</h2>
+        <p className="mt-2 text-sm text-gray-600">
           Estimate core expenses for a Houston 1031 exchange. Adjust values to match your
           closing disclosure.
         </p>
       </div>
       <div className="grid gap-6 md:grid-cols-2">
         {fieldMeta.map(({ key, label, helper, placeholder }) => (
-          <label key={key} className="block text-sm font-semibold text-amber-200">
-            {label}
+          <div key={key}>
+            <label className="block text-xs font-medium uppercase tracking-[0.1em] text-warm-brown">
+              {label}
+            </label>
             <input
               type="number"
               inputMode="decimal"
               value={getValue(key)}
               onChange={(event) => handleChange(key, event.target.value)}
               placeholder={placeholder}
-              className="mt-2 w-full rounded-2xl border border-white/10 bg-slate-950/40 px-4 py-3 text-sm text-white placeholder:text-slate-500 focus:border-amber-300 focus:outline-none focus:ring-2 focus:ring-amber-200/40"
+              className="mt-2 w-full border border-warm-brown/20 bg-white px-4 py-3 text-sm text-gray-900 placeholder:text-gray-400 focus:border-warm-brown focus:outline-none focus:ring-1 focus:ring-warm-brown"
             />
-            <span className="mt-1 block text-xs text-slate-400">{helper}</span>
+            <span className="mt-1 block text-xs text-gray-500">{helper}</span>
             {errors[key] ? (
-              <span className="mt-1 block text-xs text-red-300">{errors[key]}</span>
+              <span className="mt-1 block text-xs text-red-600">{errors[key]}</span>
             ) : null}
-          </label>
+          </div>
         ))}
       </div>
 
-      <div className="rounded-3xl border border-amber-200/40 bg-amber-50/5 p-6 text-white">
-        <p className="text-xs font-semibold uppercase tracking-[0.3em] text-amber-200">
-          Total estimated exchange costs
+      <div className="bg-warm-brown p-6 text-white">
+        <p className="text-xs font-medium uppercase tracking-[0.15em] text-white/70">
+          Total Estimated Exchange Costs
         </p>
-        <p className="text-3xl font-semibold">
+        <p className="mt-2 text-3xl font-medium">
           {results ? currencyFormatter.format(results.totalCosts) : "—"}
         </p>
-        <p className="text-sm text-slate-200">
+        <p className="mt-2 text-sm text-white/80">
           Includes qualified intermediary, escrow, title insurance, and Harris County
           recording fees.
         </p>
       </div>
 
       <div className="grid gap-4 md:grid-cols-2">
-        <div className="rounded-2xl border border-white/10 bg-slate-950/40 p-4">
-          <p className="text-xs font-semibold uppercase tracking-[0.3em] text-amber-200">
-            Qualified intermediary fee
+        <div className="bg-white p-6">
+          <p className="text-xs font-medium uppercase tracking-[0.15em] text-warm-brown">
+            Qualified Intermediary Fee
           </p>
-          <p className="text-2xl font-semibold">
+          <p className="mt-2 text-2xl font-medium text-gray-900">
             {results ? currencyFormatter.format(results.qiFee) : "—"}
           </p>
-          <p className="text-xs text-slate-300">
+          <p className="mt-1 text-xs text-gray-500">
             Covers escrow of exchange proceeds, assignment paperwork, and tracking.
           </p>
         </div>
-        <div className="rounded-2xl border border-white/10 bg-slate-950/40 p-4">
-          <p className="text-xs font-semibold uppercase tracking-[0.3em] text-amber-200">
-            Escrow fee
+        <div className="bg-white p-6">
+          <p className="text-xs font-medium uppercase tracking-[0.15em] text-warm-brown">
+            Escrow Fee
           </p>
-          <p className="text-2xl font-semibold">
+          <p className="mt-2 text-2xl font-medium text-gray-900">
             {results ? currencyFormatter.format(results.escrowFee) : "—"}
           </p>
-          <p className="text-xs text-slate-300">
+          <p className="mt-1 text-xs text-gray-500">
             Houston escrow providers typically quote a flat transaction fee.
           </p>
         </div>
-        <div className="rounded-2xl border border-white/10 bg-slate-950/40 p-4">
-          <p className="text-xs font-semibold uppercase tracking-[0.3em] text-amber-200">
-            Title insurance
+        <div className="bg-white p-6">
+          <p className="text-xs font-medium uppercase tracking-[0.15em] text-warm-brown">
+            Title Insurance
           </p>
-          <p className="text-2xl font-semibold">
+          <p className="mt-2 text-2xl font-medium text-gray-900">
             {results ? currencyFormatter.format(results.titleInsurance) : "—"}
           </p>
-          <p className="text-xs text-slate-300">
+          <p className="mt-1 text-xs text-gray-500">
             Texas title premiums are regulated; enter your expected rate above.
           </p>
         </div>
-        <div className="rounded-2xl border border-white/10 bg-slate-950/40 p-4">
-          <p className="text-xs font-semibold uppercase tracking-[0.3em] text-amber-200">
-            Recording fees
+        <div className="bg-white p-6">
+          <p className="text-xs font-medium uppercase tracking-[0.15em] text-warm-brown">
+            Recording Fees
           </p>
-          <p className="text-2xl font-semibold">
+          <p className="mt-2 text-2xl font-medium text-gray-900">
             {results ? currencyFormatter.format(results.recordingFees) : "—"}
           </p>
-          <p className="text-xs text-slate-300">
+          <p className="mt-1 text-xs text-gray-500">
             Harris County recording averages $275–$525 depending on page counts.
           </p>
         </div>
       </div>
 
-      <div className="rounded-2xl border border-white/10 bg-white/5 p-6 text-sm text-slate-200">
-        <p className="mb-2 font-semibold text-white">Note on Texas transfer taxes</p>
+      <div className="border-l-4 border-warm-brown bg-white p-6 text-sm text-gray-700">
+        <p className="mb-2 font-medium text-warm-brown">Note on Texas Transfer Taxes</p>
         <p>
           Texas does not impose a state real estate transfer tax, but local recording,
           documentary, and courier fees still apply. Always reconcile these estimates
           with your preliminary closing statement.
         </p>
       </div>
-      <style jsx>{`
-        @media print {
-          .tool-card {
-            background: #ffffff !important;
-            color: #000000 !important;
-            box-shadow: none !important;
-          }
-        }
-      `}</style>
     </div>
   );
 }

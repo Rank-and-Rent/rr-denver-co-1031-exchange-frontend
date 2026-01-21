@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import Script from "next/script";
+import { Playfair_Display } from "next/font/google";
 import { propertyTypesData } from "@/data/property-types";
 import { servicesData } from "@/data/services";
 import { locationsData } from "@/data/locations";
@@ -16,6 +17,12 @@ import {
   PRIMARY_PHONE_TEL,
   PRIMARY_STATE_ABBR,
 } from "@/lib/constants";
+
+const playfair = Playfair_Display({
+  subsets: ["latin"],
+  display: "swap",
+  weight: ["400", "500", "600", "700"],
+});
 
 export async function generateStaticParams() {
   return propertyTypesData.map((propertyType) => ({
@@ -96,175 +103,232 @@ export default async function PropertyTypePage({ params }: { params: Promise<{ s
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
-        <Breadcrumbs
-          items={[
-            { label: "Home", href: "/" },
-            { label: "Property Types", href: "/property-types" },
-            { label: propertyType.name },
-          ]}
-        />
-        {propertyType.heroImage && (
-          <div className="relative mb-10 h-64 w-full overflow-hidden rounded-3xl">
-            <Image
-              src={propertyType.heroImage}
-              alt={propertyType.name}
-              fill
-              className="object-cover"
-              priority
-            />
+      <div className="bg-white">
+        {/* Hero Section with Image */}
+        <section className="relative">
+          {propertyType.heroImage && (
+            <div className="relative h-80 md:h-96 w-full overflow-hidden">
+              <Image
+                src={propertyType.heroImage}
+                alt={propertyType.name}
+                fill
+                className="object-cover"
+                priority
+              />
+              <div className="absolute inset-0 bg-gradient-to-b from-warm-brown/60 to-warm-brown/90" />
+            </div>
+          )}
+          <div className={`${propertyType.heroImage ? 'absolute inset-0 flex items-end' : 'bg-warm-brown'}`}>
+            <div className="mx-auto max-w-7xl px-6 md:px-8 py-12 md:py-16 w-full">
+              <Breadcrumbs
+                items={[
+                  { label: "Home", href: "/" },
+                  { label: "Property Types", href: "/property-types" },
+                  { label: propertyType.name },
+                ]}
+                className="mb-6 text-sm"
+              />
+              <p className="text-xs font-medium uppercase tracking-[0.3em] text-white/70">
+                Property Type
+              </p>
+              <h1 className={`mt-4 text-3xl tracking-wide text-white sm:text-4xl md:text-5xl ${playfair.className}`}>
+                {propertyType.name} replacement properties
+              </h1>
+              <p className="mt-4 max-w-2xl text-lg font-light leading-relaxed text-white/80">
+                Understand how {propertyType.name.toLowerCase()} assets fit within
+                IRS identification rules, debt replacement math, and lender
+                expectations for {PRIMARY_CITY}, {PRIMARY_STATE_ABBR} exchanges.
+              </p>
+            </div>
           </div>
-        )}
-        <div className="space-y-4">
-          <p className="text-xs font-semibold uppercase tracking-[0.32em] text-amber-300">
-            Property Type
-          </p>
-          <h1 className="text-3xl font-semibold text-white sm:text-4xl">
-            {propertyType.name} replacement properties
-          </h1>
-          <p className="text-base text-slate-300">
-            Understand how {propertyType.name.toLowerCase()} assets fit within
-            IRS identification rules, debt replacement math, and lender
-            expectations for {PRIMARY_CITY}, {PRIMARY_STATE_ABBR} exchanges.
-          </p>
-        </div>
-
-        <section className="mt-12 space-y-6 rounded-3xl border border-white/10 bg-white/5 p-6">
-          <h2 className="text-2xl font-semibold text-white">
-            Why investors choose {propertyType.name.toLowerCase()}
-          </h2>
-          <p className="text-sm text-slate-300">
-            We surface rent roll considerations, operating expense norms, and
-            disposition risks unique to {propertyType.name.toLowerCase()}
-            assets.
-          </p>
-          <ul className="space-y-3 text-sm text-slate-200">
-            <li>
-              • Basis planning and depreciation reset modeling for{" "}
-              {propertyType.name.toLowerCase()} portfolios.
-            </li>
-            <li>
-              • Identification strategy that covers both three property and 200
-              percent paths.
-            </li>
-            <li>
-              • Lender prep packages that highlight income durability for{" "}
-              {propertyType.name.toLowerCase()} replacements.
-            </li>
-          </ul>
         </section>
 
-        {relatedServices.length > 0 && (
-          <section className="mt-12 space-y-4 rounded-3xl border border-white/10 bg-white/5 p-6">
-            <div className="flex items-center justify-between">
-              <h2 className="text-2xl font-semibold text-white">
-                Related services
-              </h2>
-              <Link
-                href="/services"
-                className="text-xs font-semibold uppercase tracking-[0.32em] text-amber-200"
-              >
-                View all services
-              </Link>
+        {/* Why Investors Choose Section */}
+        <section className="py-16 md:py-24">
+          <div className="mx-auto max-w-7xl px-6 md:px-8">
+            <div className="grid gap-12 lg:grid-cols-2">
+              <div>
+                <p className="text-xs font-medium uppercase tracking-[0.2em] text-warm-brown">
+                  Investment Insights
+                </p>
+                <h2 className={`mt-4 text-3xl text-gray-900 ${playfair.className}`}>
+                  Why investors choose {propertyType.name.toLowerCase()}
+                </h2>
+                <p className="mt-4 text-gray-600 leading-relaxed">
+                  We surface rent roll considerations, operating expense norms, and
+                  disposition risks unique to {propertyType.name.toLowerCase()} assets.
+                </p>
+              </div>
+              <div className="space-y-4">
+                {[
+                  `Basis planning and depreciation reset modeling for ${propertyType.name.toLowerCase()} portfolios.`,
+                  `Identification strategy that covers both three property and 200 percent paths.`,
+                  `Lender prep packages that highlight income durability for ${propertyType.name.toLowerCase()} replacements.`,
+                ].map((item, index) => (
+                  <div key={index} className="flex gap-4 bg-cream p-6">
+                    <span className={`text-2xl font-light text-warm-brown/40 ${playfair.className}`}>
+                      0{index + 1}
+                    </span>
+                    <p className="text-gray-700">{item}</p>
+                  </div>
+                ))}
+              </div>
             </div>
-            <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-              {relatedServices.map((service) => (
-                <Link
-                  key={service.slug}
-                  href={`/services/${service.slug}`}
-                  className="rounded-2xl border border-white/10 bg-slate-950/40 p-4 text-slate-200 transition hover:-translate-y-1 hover:border-amber-200/50"
-                >
-                  <p className="text-xs font-semibold uppercase tracking-[0.28em] text-amber-200">
-                    {service.category}
+          </div>
+        </section>
+
+        {/* Related Services */}
+        {relatedServices.length > 0 && (
+          <section className="bg-cream py-16 md:py-24">
+            <div className="mx-auto max-w-7xl px-6 md:px-8">
+              <div className="flex items-end justify-between mb-12">
+                <div>
+                  <p className="text-xs font-medium uppercase tracking-[0.2em] text-warm-brown">
+                    Available Support
                   </p>
-                  <h3 className="mt-2 text-sm font-semibold text-white">
-                    {service.name}
-                  </h3>
-                  <p className="mt-1 text-xs text-slate-400">{service.short}</p>
+                  <h2 className={`mt-4 text-3xl text-gray-900 ${playfair.className}`}>
+                    Related services
+                  </h2>
+                </div>
+                <Link
+                  href="/services"
+                  className="text-sm font-medium text-warm-brown underline underline-offset-4 hover:text-dark-brown"
+                >
+                  View all services
                 </Link>
-              ))}
+              </div>
+              <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+                {relatedServices.map((service) => (
+                  <Link
+                    key={service.slug}
+                    href={`/services/${service.slug}`}
+                    className="group bg-white p-6 transition-all hover:shadow-luxury"
+                  >
+                    <p className="text-xs font-medium uppercase tracking-[0.15em] text-warm-brown">
+                      {service.category}
+                    </p>
+                    <h3 className={`mt-2 text-lg text-gray-900 ${playfair.className}`}>
+                      {service.name}
+                    </h3>
+                    <p className="mt-2 text-xs text-gray-500">{service.short}</p>
+                  </Link>
+                ))}
+              </div>
             </div>
           </section>
         )}
 
-        <section className="mt-12 rounded-3xl border border-white/10 bg-white/5 p-6">
-          <h2 className="text-2xl font-semibold text-white">
-            Popular markets for {propertyType.name}
-          </h2>
-          <div className="mt-4 grid gap-4 md:grid-cols-3">
-            {locationsData
-              .filter((location) => location.type === "city")
-              .slice(0, 6)
-              .map((location) => (
-                <Link
-                  key={location.slug}
-                  href={`/locations/${location.slug}`}
-                  className="rounded-2xl border border-white/10 bg-slate-950/40 p-4 text-slate-200 transition hover:-translate-y-1 hover:border-amber-200/50"
+        {/* Popular Markets Section */}
+        <section className="py-16 md:py-24">
+          <div className="mx-auto max-w-7xl px-6 md:px-8">
+            <div className="text-center mb-12">
+              <p className="text-xs font-medium uppercase tracking-[0.3em] text-warm-brown">
+                Coverage Areas
+              </p>
+              <h2 className={`mt-4 text-3xl text-gray-900 ${playfair.className}`}>
+                Popular markets for {propertyType.name}
+              </h2>
+            </div>
+            <div className="grid gap-6 md:grid-cols-3 lg:grid-cols-6">
+              {locationsData
+                .filter((location) => location.type === "city")
+                .slice(0, 6)
+                .map((location) => (
+                  <Link
+                    key={location.slug}
+                    href={`/locations/${location.slug}`}
+                    className="group bg-cream p-4 text-center transition-all hover:bg-warm-brown"
+                  >
+                    <p className={`text-lg text-gray-900 group-hover:text-white ${playfair.className}`}>
+                      {location.name}
+                    </p>
+                    <p className="mt-1 text-xs text-gray-500 group-hover:text-white/70">
+                      Explore demand
+                    </p>
+                  </Link>
+                ))}
+            </div>
+          </div>
+        </section>
+
+        {/* FAQ Section */}
+        <section className="bg-cream py-16 md:py-24">
+          <div className="mx-auto max-w-4xl px-6 md:px-8">
+            <div className="text-center mb-12">
+              <p className="text-xs font-medium uppercase tracking-[0.3em] text-warm-brown">
+                Common Questions
+              </p>
+              <h2 className={`mt-4 text-3xl text-gray-900 ${playfair.className}`}>
+                {propertyType.name} FAQ
+              </h2>
+            </div>
+            <div className="divide-y divide-warm-brown/20 bg-white">
+              {faqs.map((faq) => (
+                <details
+                  key={faq.question}
+                  className="group py-6 px-8"
                 >
-                  <p className="text-sm font-semibold text-white">
-                    {location.name}
+                  <summary className="flex cursor-pointer items-center justify-between gap-4 text-left">
+                    <span className={`text-lg text-gray-900 group-open:text-warm-brown ${playfair.className}`}>
+                      {faq.question}
+                    </span>
+                    <span className="flex h-8 w-8 shrink-0 items-center justify-center border border-warm-brown/30 text-warm-brown transition group-open:bg-warm-brown group-open:text-white">
+                      <svg className="h-4 w-4 transition-transform group-open:rotate-45" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
+                      </svg>
+                    </span>
+                  </summary>
+                  <p className="mt-4 text-sm leading-relaxed text-gray-600 pr-12">
+                    {faq.answer}
                   </p>
-                  <p className="text-xs text-slate-400">
-                    Explore {propertyType.name.toLowerCase()} demand
-                  </p>
-                </Link>
+                </details>
               ))}
+            </div>
           </div>
         </section>
 
-        <section className="mt-12 space-y-4 rounded-3xl border border-white/10 bg-white/5 p-6">
-          <h2 className="text-2xl font-semibold text-white">
-            {propertyType.name} FAQ
-          </h2>
-          <div className="space-y-3">
-            {faqs.map((faq) => (
-              <details
-                key={faq.question}
-                className="rounded-2xl border border-white/10 bg-slate-950/40 p-4"
-              >
-                <summary className="cursor-pointer text-sm font-semibold text-white">
-                  {faq.question}
-                </summary>
-                <p className="mt-2 text-sm text-slate-300">{faq.answer}</p>
-              </details>
-            ))}
-          </div>
-        </section>
-
-        <section className="mt-12 rounded-3xl border border-amber-200/30 bg-amber-50/5 p-6 text-white">
-          <h2 className="text-2xl font-semibold">
-            Start a {propertyType.name} exchange plan
-          </h2>
-          <p className="mt-2 text-sm text-slate-200">
-            We can review current debt, lender hurdles, and intermediary options
-            for {propertyType.name.toLowerCase()} replacements.
-          </p>
-          <div className="mt-6 flex flex-col gap-3 sm:flex-row">
-            <a
-              href={`tel:${PRIMARY_PHONE_TEL}`}
-              className="inline-flex items-center justify-center rounded-full border border-white/20 px-5 py-3 text-xs font-semibold uppercase tracking-[0.28em]"
-            >
-              Call {PRIMARY_PHONE_DISPLAY}
-            </a>
-            <Link
-              href="#contact-form"
-              className="inline-flex items-center justify-center rounded-full bg-amber-300 px-5 py-3 text-xs font-semibold uppercase tracking-[0.28em] text-slate-900"
-            >
-              Contact team
-            </Link>
-          </div>
-        </section>
-
-        <section id="contact-form" className="mt-12">
-          <div className="rounded-3xl border border-white/10 bg-white/5 p-6">
-            <h2 className="text-2xl font-semibold text-white">
-              Request underwriting support
+        {/* CTA Section */}
+        <section className="bg-warm-brown py-16 md:py-24">
+          <div className="mx-auto max-w-3xl px-6 md:px-8 text-center">
+            <h2 className={`text-3xl text-white ${playfair.className}`}>
+              Start a {propertyType.name} exchange plan
             </h2>
-            <p className="text-sm text-slate-300">
-              Mention the property type so we can prefill lender-ready
-              materials.
+            <p className="mt-4 text-lg font-light text-white/80">
+              We can review current debt, lender hurdles, and intermediary options
+              for {propertyType.name.toLowerCase()} replacements.
             </p>
-            <div className="mt-6 rounded-3xl border border-white/10 bg-slate-950/40 p-4">
+            <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
+              <a
+                href={`tel:${PRIMARY_PHONE_TEL}`}
+                className="inline-flex items-center justify-center border border-white/50 px-8 py-4 text-xs font-semibold uppercase tracking-[0.2em] text-white transition hover:border-white hover:bg-white hover:text-warm-brown"
+              >
+                Call {PRIMARY_PHONE_DISPLAY}
+              </a>
+              <Link
+                href="#contact-form"
+                className="inline-flex items-center justify-center border border-white bg-white px-8 py-4 text-xs font-semibold uppercase tracking-[0.2em] text-warm-brown transition hover:bg-transparent hover:text-white"
+              >
+                Contact team
+              </Link>
+            </div>
+          </div>
+        </section>
+
+        {/* Contact Form Section */}
+        <section id="contact-form" className="py-16 md:py-24">
+          <div className="mx-auto max-w-3xl px-6 md:px-8">
+            <div className="text-center mb-10">
+              <p className="text-xs font-medium uppercase tracking-[0.3em] text-warm-brown">
+                Get Started
+              </p>
+              <h2 className={`mt-4 text-3xl text-gray-900 ${playfair.className}`}>
+                Request underwriting support
+              </h2>
+              <p className="mt-4 text-gray-600">
+                Mention the property type so we can prefill lender-ready materials.
+              </p>
+            </div>
+            <div className="bg-cream p-8">
               <LeadForm
                 prepopulatedService={`${propertyType.name} 1031 Exchange`}
               />

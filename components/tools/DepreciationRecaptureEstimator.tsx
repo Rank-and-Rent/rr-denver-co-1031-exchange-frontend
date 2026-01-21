@@ -92,111 +92,99 @@ export default function DepreciationRecaptureEstimator() {
   };
 
   return (
-    <div className="space-y-8">
-      <div className="rounded-2xl border border-gray-200 bg-white p-6 shadow-lg">
-        <h2 className="mb-6 font-serif text-2xl font-bold text-[#0B3C5D]">
-          Depreciation Recapture Estimator Inputs
+    <div className="space-y-8 bg-cream p-8">
+      <div>
+        <h2 className="text-2xl font-medium text-warm-brown">
+          Depreciation Recapture Estimator
         </h2>
-        <div className="grid gap-6 md:grid-cols-2">
-          <div>
-            <label
-              htmlFor="original-cost"
-              className="mb-2 block text-sm font-medium text-gray-700"
-            >
-              Original Cost Basis ($)
-            </label>
-            <input
-              id="original-cost"
-              type="text"
-              value={originalCost}
-              onChange={(e) => handleInputChange("originalCost", e.target.value)}
-              placeholder="500,000"
-              className="w-full rounded-lg border border-gray-300 px-4 py-2 text-gray-900 focus:border-[#0B3C5D] focus:outline-none focus:ring-2 focus:ring-[#0B3C5D]/20"
-            />
-            <p className="mt-1 text-xs text-gray-500">
-              Original purchase price plus improvements
-            </p>
-          </div>
-
-          <div>
-            <label
-              htmlFor="accumulated-depreciation"
-              className="mb-2 block text-sm font-medium text-gray-700"
-            >
-              Accumulated Depreciation ($)
-            </label>
-            <input
-              id="accumulated-depreciation"
-              type="text"
-              value={accumulatedDepreciation}
-              onChange={(e) => handleInputChange("depreciation", e.target.value)}
-              placeholder="100,000"
-              className="w-full rounded-lg border border-gray-300 px-4 py-2 text-gray-900 focus:border-[#0B3C5D] focus:outline-none focus:ring-2 focus:ring-[#0B3C5D]/20"
-            />
-            <p className="mt-1 text-xs text-gray-500">
-              Total depreciation taken over ownership period
-            </p>
-          </div>
-
-          <div>
-            <label
-              htmlFor="sale-price"
-              className="mb-2 block text-sm font-medium text-gray-700"
-            >
-              Sale Price ($)
-            </label>
-            <input
-              id="sale-price"
-              type="text"
-              value={salePrice}
-              onChange={(e) => handleInputChange("salePrice", e.target.value)}
-              placeholder="750,000"
-              className="w-full rounded-lg border border-gray-300 px-4 py-2 text-gray-900 focus:border-[#0B3C5D] focus:outline-none focus:ring-2 focus:ring-[#0B3C5D]/20"
-            />
-            <p className="mt-1 text-xs text-gray-500">
-              Sale price of the relinquished property
-            </p>
-          </div>
-
-          <div>
-            <label
-              htmlFor="recapture-rate"
-              className="mb-2 block text-sm font-medium text-gray-700"
-            >
-              Recapture Tax Rate (%)
-            </label>
-            <input
-              id="recapture-rate"
-              type="text"
-              value={recaptureRate}
-              onChange={(e) => handleInputChange("rate", e.target.value)}
-              placeholder="25"
-              className="w-full rounded-lg border border-gray-300 px-4 py-2 text-gray-900 focus:border-[#0B3C5D] focus:outline-none focus:ring-2 focus:ring-[#0B3C5D]/20"
-            />
-            <p className="mt-1 text-xs text-gray-500">
-              Typically 25% for unrecaptured Section 1250 gain (illustrative)
-            </p>
-          </div>
-        </div>
-
-        <button
-          onClick={calculateRecapture}
-          className="mt-6 w-full rounded-lg bg-[#C9A227] px-6 py-3 font-semibold text-gray-900 transition hover:bg-[#B8921F] focus:outline-none focus:ring-2 focus:ring-[#C9A227] focus:ring-offset-2"
-        >
-          Calculate Depreciation Recapture
-        </button>
+        <p className="mt-2 text-sm text-gray-600">
+          Calculate the potential depreciation recapture tax on your property sale.
+        </p>
       </div>
 
+      <div className="grid gap-6 md:grid-cols-2">
+        <div>
+          <label className="block text-xs font-medium uppercase tracking-[0.1em] text-warm-brown">
+            Original Cost Basis ($)
+          </label>
+          <input
+            type="text"
+            value={originalCost}
+            onChange={(e) => handleInputChange("originalCost", e.target.value)}
+            placeholder="500,000"
+            className="mt-2 w-full border border-warm-brown/20 bg-white px-4 py-3 text-sm text-gray-900 placeholder:text-gray-400 focus:border-warm-brown focus:outline-none focus:ring-1 focus:ring-warm-brown"
+          />
+          <p className="mt-1 text-xs text-gray-500">
+            Original purchase price plus improvements
+          </p>
+        </div>
+
+        <div>
+          <label className="block text-xs font-medium uppercase tracking-[0.1em] text-warm-brown">
+            Accumulated Depreciation ($)
+          </label>
+          <input
+            type="text"
+            value={accumulatedDepreciation}
+            onChange={(e) => handleInputChange("depreciation", e.target.value)}
+            placeholder="100,000"
+            className="mt-2 w-full border border-warm-brown/20 bg-white px-4 py-3 text-sm text-gray-900 placeholder:text-gray-400 focus:border-warm-brown focus:outline-none focus:ring-1 focus:ring-warm-brown"
+          />
+          <p className="mt-1 text-xs text-gray-500">
+            Total depreciation taken over ownership period
+          </p>
+        </div>
+
+        <div>
+          <label className="block text-xs font-medium uppercase tracking-[0.1em] text-warm-brown">
+            Sale Price ($)
+          </label>
+          <input
+            type="text"
+            value={salePrice}
+            onChange={(e) => handleInputChange("salePrice", e.target.value)}
+            placeholder="750,000"
+            className="mt-2 w-full border border-warm-brown/20 bg-white px-4 py-3 text-sm text-gray-900 placeholder:text-gray-400 focus:border-warm-brown focus:outline-none focus:ring-1 focus:ring-warm-brown"
+          />
+          <p className="mt-1 text-xs text-gray-500">
+            Sale price of the relinquished property
+          </p>
+        </div>
+
+        <div>
+          <label className="block text-xs font-medium uppercase tracking-[0.1em] text-warm-brown">
+            Recapture Tax Rate (%)
+          </label>
+          <input
+            type="text"
+            value={recaptureRate}
+            onChange={(e) => handleInputChange("rate", e.target.value)}
+            placeholder="25"
+            className="mt-2 w-full border border-warm-brown/20 bg-white px-4 py-3 text-sm text-gray-900 placeholder:text-gray-400 focus:border-warm-brown focus:outline-none focus:ring-1 focus:ring-warm-brown"
+          />
+          <p className="mt-1 text-xs text-gray-500">
+            Typically 25% for unrecaptured Section 1250 gain (illustrative)
+          </p>
+        </div>
+      </div>
+
+      <button
+        onClick={calculateRecapture}
+        className="w-full bg-warm-brown px-6 py-3 font-medium text-white transition hover:bg-warm-brown/90 focus:outline-none focus:ring-2 focus:ring-warm-brown focus:ring-offset-2"
+      >
+        Calculate Depreciation Recapture
+      </button>
+
       {results && (
-        <div className="rounded-2xl border border-gray-200 bg-white p-6 shadow-lg">
-          <h2 className="mb-6 font-serif text-2xl font-bold text-[#0B3C5D]">
-            Depreciation Recapture Results
-          </h2>
+        <div className="space-y-6">
+          <h3 className="text-xl font-medium text-warm-brown">
+            Recapture Results
+          </h3>
 
           {!results.isValid && results.errors.length > 0 && (
-            <div className="mb-6 rounded-lg border border-red-200 bg-red-50 p-4">
-              <h3 className="mb-2 font-semibold text-red-800">Please correct the following errors:</h3>
-              <ul className="list-disc list-inside space-y-1 text-sm text-red-700">
+            <div className="border-l-4 border-red-500 bg-white p-6">
+              <h4 className="font-medium text-red-800">Please correct the following errors:</h4>
+              <ul className="mt-2 list-disc list-inside space-y-1 text-sm text-red-700">
                 {results.errors.map((error, index) => (
                   <li key={index}>{error}</li>
                 ))}
@@ -206,62 +194,52 @@ export default function DepreciationRecaptureEstimator() {
 
           {results.isValid && (
             <div className="space-y-4">
-              <div className="rounded-lg border border-gray-200 bg-gray-50 p-4">
-                <div className="flex justify-between items-center">
-                  <span className="text-sm font-medium text-gray-700">Adjusted Basis:</span>
-                  <span className="text-lg font-bold text-[#0B3C5D]">
-                    ${(parseFloat(originalCost) - (parseFloat(accumulatedDepreciation) || 0)).toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
-                  </span>
-                </div>
-                <p className="mt-1 text-xs text-gray-600">
+              <div className="bg-white p-6">
+                <p className="text-xs font-medium uppercase tracking-[0.15em] text-warm-brown">Adjusted Basis</p>
+                <p className="mt-2 text-2xl font-medium text-gray-900">
+                  ${(parseFloat(originalCost) - (parseFloat(accumulatedDepreciation) || 0)).toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                </p>
+                <p className="mt-1 text-xs text-gray-500">
                   Original cost minus accumulated depreciation
                 </p>
               </div>
 
-              <div className="rounded-lg border border-gray-200 bg-gray-50 p-4">
-                <div className="flex justify-between items-center">
-                  <span className="text-sm font-medium text-gray-700">Total Gain:</span>
-                  <span className="text-lg font-bold text-[#0B3C5D]">
-                    ${(parseFloat(salePrice) - (parseFloat(originalCost) - (parseFloat(accumulatedDepreciation) || 0))).toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
-                  </span>
-                </div>
-                <p className="mt-1 text-xs text-gray-600">
+              <div className="bg-white p-6">
+                <p className="text-xs font-medium uppercase tracking-[0.15em] text-warm-brown">Total Gain</p>
+                <p className="mt-2 text-2xl font-medium text-gray-900">
+                  ${(parseFloat(salePrice) - (parseFloat(originalCost) - (parseFloat(accumulatedDepreciation) || 0))).toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                </p>
+                <p className="mt-1 text-xs text-gray-500">
                   Sale price minus adjusted basis
                 </p>
               </div>
 
-              <div className="rounded-lg border border-gray-200 bg-gray-50 p-4">
-                <div className="flex justify-between items-center">
-                  <span className="text-sm font-medium text-gray-700">Depreciation Recapture:</span>
-                  <span className="text-lg font-bold text-[#0B3C5D]">
-                    ${results.totalDepreciation.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
-                  </span>
-                </div>
-                <p className="mt-1 text-xs text-gray-600">
+              <div className="bg-white p-6">
+                <p className="text-xs font-medium uppercase tracking-[0.15em] text-warm-brown">Depreciation Recapture</p>
+                <p className="mt-2 text-2xl font-medium text-gray-900">
+                  ${results.totalDepreciation.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                </p>
+                <p className="mt-1 text-xs text-gray-500">
                   Lesser of accumulated depreciation or total gain
                 </p>
               </div>
 
-              <div className="rounded-lg border-2 border-[#0B3C5D] bg-[#0B3C5D]/5 p-4">
-                <div className="flex justify-between items-center">
-                  <span className="text-base font-semibold text-gray-900">Recapture Tax:</span>
-                  <span className="text-2xl font-bold text-[#0B3C5D]">
-                    ${results.recaptureTax.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
-                  </span>
-                </div>
-                <p className="mt-1 text-xs text-gray-600">
+              <div className="bg-warm-brown p-6 text-white">
+                <p className="text-xs font-medium uppercase tracking-[0.15em] text-white/70">Recapture Tax</p>
+                <p className="mt-2 text-3xl font-medium">
+                  ${results.recaptureTax.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                </p>
+                <p className="mt-2 text-sm text-white/80">
                   Tax on depreciation recapture at {recaptureRate}% rate (illustrative)
                 </p>
               </div>
 
-              <div className="rounded-lg border border-[#C9A227] bg-[#C9A227]/10 p-4">
-                <div className="flex justify-between items-center">
-                  <span className="text-sm font-medium text-gray-700">Net Proceeds After Recapture:</span>
-                  <span className="text-lg font-bold text-[#0B3C5D]">
-                    ${results.netAfterRecapture.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
-                  </span>
-                </div>
-                <p className="mt-1 text-xs text-gray-600">
+              <div className="bg-white p-6">
+                <p className="text-xs font-medium uppercase tracking-[0.15em] text-warm-brown">Net Proceeds After Recapture</p>
+                <p className="mt-2 text-2xl font-medium text-gray-900">
+                  ${results.netAfterRecapture.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                </p>
+                <p className="mt-1 text-xs text-gray-500">
                   Sale price minus recapture tax
                 </p>
               </div>
@@ -270,9 +248,9 @@ export default function DepreciationRecaptureEstimator() {
         </div>
       )}
 
-      <div className="rounded-lg border border-gray-200 bg-gray-50 p-6">
-        <h3 className="mb-3 font-semibold text-[#0B3C5D]">Understanding Depreciation Recapture</h3>
-        <div className="space-y-2 text-sm text-gray-700">
+      <div className="border-l-4 border-warm-brown bg-white p-6 text-sm text-gray-700">
+        <h3 className="mb-3 font-medium text-warm-brown">Understanding Depreciation Recapture</h3>
+        <div className="space-y-2">
           <p>
             <strong>Depreciation Recapture:</strong> When you sell a rental property, the IRS requires you to "recapture" depreciation deductions you've taken. This recaptured depreciation is taxed at a higher rate (typically 25% for unrecaptured Section 1250 gain) than long-term capital gains.
           </p>
@@ -290,5 +268,3 @@ export default function DepreciationRecaptureEstimator() {
     </div>
   );
 }
-
-

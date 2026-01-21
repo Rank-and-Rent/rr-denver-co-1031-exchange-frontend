@@ -1,7 +1,15 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Script from "next/script";
+import { Playfair_Display } from "next/font/google";
+import { Breadcrumbs } from "@/components/Breadcrumbs";
 import DebtReliefCalculator from "@/components/tools/DebtReliefCalculator";
+
+const playfair = Playfair_Display({
+  subsets: ["latin"],
+  display: "swap",
+  weight: ["400", "500", "600", "700"],
+});
 
 export const metadata: Metadata = {
   title: "Debt Relief Calculator | 1031 Exchange Denver",
@@ -77,71 +85,63 @@ export default function DebtReliefCalculatorPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(toolJsonLd) }}
       />
-      <nav className="mx-auto max-w-4xl px-6 pt-8 md:px-8" aria-label="Breadcrumb">
-        <ol className="flex items-center space-x-2 text-sm">
-          {breadcrumbItems.map((item, index) => (
-            <li key={index} className="flex items-center">
-              {index > 0 && <span className="mx-2 text-gray-400">/</span>}
-              {item.href ? (
-                <Link
-                  href={item.href}
-                  className="text-[#0B3C5D] hover:text-[#C9A227] transition"
-                >
-                  {item.label}
+      <div className="bg-white">
+        <section className="bg-warm-brown py-16 md:py-20">
+          <div className="mx-auto max-w-4xl px-6 md:px-8">
+            <Breadcrumbs items={breadcrumbItems} className="mb-8 text-sm" />
+            <h1 className={`text-3xl tracking-wide text-white md:text-4xl ${playfair.className}`}>
+              Debt Relief Calculator
+            </h1>
+            <p className="mt-4 text-lg font-light leading-relaxed text-white/80">
+              Calculate mortgage boot when your new mortgage is less than your old mortgage in a 1031 exchange. 
+              When you reduce your debt in an exchange, the difference is considered "mortgage relief" and creates 
+              taxable boot, even if you don't receive any cash.
+            </p>
+          </div>
+        </section>
+
+        <section className="py-12 md:py-16">
+          <div className="mx-auto max-w-4xl px-6 md:px-8">
+            <DebtReliefCalculator />
+          </div>
+        </section>
+
+        <section className="py-8">
+          <div className="mx-auto max-w-4xl px-6 md:px-8">
+            <div className="border-l-4 border-warm-brown bg-cream p-6 text-sm text-gray-700">
+              <strong>Educational content only.</strong> Not tax, legal, or investment advice. 
+              Results are estimates only. Consult a qualified intermediary and tax advisor before 
+              making decisions. Colorado does not impose a state real estate transfer tax. Recording fees 
+              and title insurance premiums still apply.
+            </div>
+          </div>
+        </section>
+
+        <section className="border-t border-warm-brown/20 py-12 md:py-16">
+          <div className="mx-auto max-w-4xl px-6 md:px-8">
+            <h2 className={`text-2xl text-gray-900 mb-6 ${playfair.className}`}>
+              Related Resources
+            </h2>
+            <ul className="space-y-3">
+              <li>
+                <Link href="/tools/boot-calculator" className="text-warm-brown underline underline-offset-4 hover:text-dark-brown">
+                  Boot Calculator
                 </Link>
-              ) : (
-                <span className="text-gray-600">{item.label}</span>
-              )}
-            </li>
-          ))}
-        </ol>
-      </nav>
-      <div className="mx-auto max-w-4xl px-6 py-12 md:px-8 md:py-20">
-        <h1 className="font-serif text-3xl font-bold text-[#0B3C5D] md:text-4xl mb-4">
-          Debt Relief Calculator
-        </h1>
-        <p className="text-lg text-gray-700 mb-8">
-          Calculate mortgage boot when your new mortgage is less than your old mortgage in a 1031 exchange. 
-          When you reduce your debt in an exchange, the difference is considered "mortgage relief" and creates 
-          taxable boot, even if you don't receive any cash.
-        </p>
-
-        <DebtReliefCalculator />
-
-        <div className="mt-8 rounded-lg border border-gray-200 bg-gray-50 p-6">
-          <p className="text-sm text-gray-700">
-            <strong>Educational content only.</strong> Not tax, legal, or investment advice. 
-            Results are estimates only. Consult a qualified intermediary and tax advisor before 
-            making decisions. Colorado does not impose a state real estate transfer tax. Recording fees 
-            and title insurance premiums still apply.
-          </p>
-        </div>
-
-        <div className="mt-12 border-t border-gray-200 pt-8">
-          <h2 className="font-serif text-2xl font-bold text-[#0B3C5D] mb-4">
-            Related Resources
-          </h2>
-          <ul className="space-y-2">
-            <li>
-              <Link href="/tools/boot-calculator" className="text-[#0B3C5D] underline hover:text-[#C9A227]">
-                Boot Calculator
-              </Link>
-            </li>
-            <li>
-              <Link href="/tools/replacement-property-value-calculator" className="text-[#0B3C5D] underline hover:text-[#C9A227]">
-                Replacement Property Value Calculator
-              </Link>
-            </li>
-            <li>
-              <Link href="/services/exchange-strategy-planning" className="text-[#0B3C5D] underline hover:text-[#C9A227]">
-                Exchange Strategy Planning
-              </Link>
-            </li>
-          </ul>
-        </div>
+              </li>
+              <li>
+                <Link href="/tools/replacement-property-value-calculator" className="text-warm-brown underline underline-offset-4 hover:text-dark-brown">
+                  Replacement Property Value Calculator
+                </Link>
+              </li>
+              <li>
+                <Link href="/services/exchange-strategy-planning" className="text-warm-brown underline underline-offset-4 hover:text-dark-brown">
+                  Exchange Strategy Planning
+                </Link>
+              </li>
+            </ul>
+          </div>
+        </section>
       </div>
     </>
   );
 }
-
-

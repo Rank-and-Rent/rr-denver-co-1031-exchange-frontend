@@ -1,11 +1,18 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Script from "next/script";
+import { Playfair_Display } from "next/font/google";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { DeadlineCalculator } from "@/components/tools/DeadlineCalculator";
 import { IdentificationRulesExplainer } from "@/components/tools/IdentificationRulesExplainer";
 import { IdentificationLetterHelper } from "@/components/tools/IdentificationLetterHelper";
 import { TimelineTracker } from "@/components/tools/TimelineTracker";
+
+const playfair = Playfair_Display({
+  subsets: ["latin"],
+  display: "swap",
+  weight: ["400", "500", "600", "700"],
+});
 
 export const metadata: Metadata = {
   title: "1031 Exchange Tools | 1031 Exchange Denver",
@@ -88,55 +95,85 @@ export default function ToolsPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
       />
-      <div className="mx-auto max-w-5xl px-4 py-16 text-slate-100 sm:px-6 lg:px-8">
-        <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "Tools" }]} />
-        <div className="space-y-4">
-          <h1 className="text-4xl font-semibold text-white">1031 exchange tools</h1>
-          <p className="text-base text-slate-300">
-            Calculators and templates that keep deadlines, underwriting, and documentation
-            organized. Every tool is educational. Confirm details with your intermediary,
-            lender, attorney, and CPA.
-          </p>
-        </div>
-
-        <div className="mt-12 grid gap-6 md:grid-cols-2">
-          {tools.map((tool) => (
-            <Link
-              key={tool.slug}
-              href={`/tools/${tool.slug}`}
-              className="group rounded-3xl border border-white/10 bg-white/5 p-6 text-white transition hover:-translate-y-1 hover:border-amber-200/40 hover:bg-white/10"
-            >
-              <div className="mb-4 flex items-center justify-center rounded-lg bg-white/10 p-3 w-fit">
-                <svg
-                  className="h-8 w-8 text-amber-300"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  strokeWidth={1.5}
-                >
-                  <path strokeLinecap="round" strokeLinejoin="round" d={tool.icon} />
-                </svg>
-              </div>
-              <h2 className="text-xl font-semibold">{tool.name}</h2>
-              <p className="mt-2 text-sm text-slate-200">{tool.description}</p>
-              <div className="mt-4 text-xs font-semibold uppercase tracking-[0.3em] text-amber-200">
-                Launch tool
-              </div>
-            </Link>
-          ))}
-        </div>
-
-        <section className="mt-12 grid gap-6">
-          <DeadlineCalculator />
-          <TimelineTracker />
-          <IdentificationRulesExplainer />
-          <IdentificationLetterHelper />
+      <div className="bg-white">
+        {/* Hero Section */}
+        <section className="bg-warm-brown py-20 md:py-28">
+          <div className="mx-auto max-w-5xl px-6 md:px-8">
+            <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "Tools" }]} className="mb-8 text-sm" />
+            <div className="max-w-3xl">
+              <p className="text-xs font-medium uppercase tracking-[0.3em] text-white/70">
+                Exchange Calculators
+              </p>
+              <h1 className={`mt-4 text-3xl tracking-wide text-white sm:text-4xl md:text-5xl ${playfair.className}`}>
+                1031 exchange tools
+              </h1>
+              <p className="mt-6 text-lg font-light leading-relaxed text-white/80">
+                Calculators and templates that keep deadlines, underwriting, and documentation
+                organized. Every tool is educational. Confirm details with your intermediary,
+                lender, attorney, and CPA.
+              </p>
+            </div>
+          </div>
         </section>
 
-        <div className="mt-12 rounded-3xl border border-white/10 bg-white/5 p-6 text-sm text-slate-200">
-          <strong>Educational content only.</strong> Not tax, legal, or investment advice.
-          Results are estimates. Confirm every step with your Qualified Intermediary and advisors.
-        </div>
+        {/* Tools Grid */}
+        <section className="py-16 md:py-24">
+          <div className="mx-auto max-w-5xl px-6 md:px-8">
+            <div className="grid gap-6 md:grid-cols-2">
+              {tools.map((tool) => (
+                <Link
+                  key={tool.slug}
+                  href={`/tools/${tool.slug}`}
+                  className="group bg-cream p-8 transition-all hover:bg-warm-brown"
+                >
+                  <div className="mb-6 flex h-12 w-12 items-center justify-center border border-warm-brown/30 group-hover:border-white/30">
+                    <svg
+                      className="h-6 w-6 text-warm-brown group-hover:text-white"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                      strokeWidth={1.5}
+                    >
+                      <path strokeLinecap="round" strokeLinejoin="round" d={tool.icon} />
+                    </svg>
+                  </div>
+                  <h2 className={`text-xl text-gray-900 group-hover:text-white ${playfair.className}`}>
+                    {tool.name}
+                  </h2>
+                  <p className="mt-3 text-sm text-gray-600 group-hover:text-white/80">
+                    {tool.description}
+                  </p>
+                  <span className="mt-4 inline-flex items-center gap-2 text-xs font-medium uppercase tracking-[0.15em] text-warm-brown group-hover:text-white">
+                    Launch tool
+                    <svg className="h-4 w-4 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                    </svg>
+                  </span>
+                </Link>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Embedded Tools Section */}
+        <section className="bg-cream py-16 md:py-24">
+          <div className="mx-auto max-w-5xl px-6 md:px-8 space-y-8">
+            <DeadlineCalculator />
+            <TimelineTracker />
+            <IdentificationRulesExplainer />
+            <IdentificationLetterHelper />
+          </div>
+        </section>
+
+        {/* Disclaimer */}
+        <section className="py-12">
+          <div className="mx-auto max-w-5xl px-6 md:px-8">
+            <div className="border-l-4 border-warm-brown bg-cream p-6 text-sm text-gray-700">
+              <strong className="text-gray-900">Educational content only.</strong> Not tax, legal, or investment advice.
+              Results are estimates. Confirm every step with your Qualified Intermediary and advisors.
+            </div>
+          </div>
+        </section>
       </div>
     </>
   );

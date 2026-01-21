@@ -35,39 +35,41 @@ export function DeadlineCalculator() {
   }, [closingDate]);
 
   return (
-    <div className="space-y-4 rounded-3xl border border-white/10 bg-white/5 p-6 text-white">
-      <h3 className="text-xl font-semibold">45 and 180 day deadlines</h3>
-      <p className="text-sm text-slate-300">
-        Enter your relinquished closing date to calculate the IRS deadlines in{" "}
-        {timezone}.
-      </p>
-      <label className="text-xs font-semibold uppercase tracking-[0.3em] text-amber-300">
+    <div className="space-y-6 bg-cream p-8">
+      <div>
+        <h3 className="text-xl font-medium text-gray-900">45 and 180 day deadlines</h3>
+        <p className="mt-1 text-sm text-gray-600">
+          Enter your relinquished closing date to calculate the IRS deadlines in{" "}
+          {timezone}.
+        </p>
+      </div>
+      <label className="block text-xs font-medium uppercase tracking-[0.15em] text-warm-brown">
         Closing date
         <input
           type="date"
           value={closingDate}
           onChange={(event) => setClosingDate(event.target.value)}
-          className="mt-2 w-full rounded-2xl border border-white/10 bg-slate-950/40 px-4 py-3 text-sm text-white focus:border-amber-300 focus:outline-none"
+          className="mt-2 w-full border border-warm-brown/20 bg-white px-4 py-3 text-sm text-gray-900 focus:border-warm-brown focus:outline-none focus:ring-1 focus:ring-warm-brown"
         />
       </label>
-      <div className="grid gap-4 md:grid-cols-2">
-        <div className="rounded-2xl border border-white/10 bg-slate-950/40 p-4">
-          <p className="text-xs font-semibold uppercase tracking-[0.3em] text-amber-200">
+      <div className="grid gap-6 md:grid-cols-2">
+        <div className="bg-white p-6">
+          <p className="text-xs font-medium uppercase tracking-[0.15em] text-warm-brown">
             Identification deadline
           </p>
-          <p className="mt-2 text-lg font-semibold">
+          <p className="mt-2 text-lg font-medium text-gray-900">
             {formatDate(deadlines.identifying)}
           </p>
-          <p className="text-xs text-slate-300">45 days after closing</p>
+          <p className="mt-1 text-xs text-gray-500">45 days after closing</p>
         </div>
-        <div className="rounded-2xl border border-white/10 bg-slate-950/40 p-4">
-          <p className="text-xs font-semibold uppercase tracking-[0.3em] text-amber-200">
+        <div className="bg-white p-6">
+          <p className="text-xs font-medium uppercase tracking-[0.15em] text-warm-brown">
             Replacement closing deadline
           </p>
-          <p className="mt-2 text-lg font-semibold">
+          <p className="mt-2 text-lg font-medium text-gray-900">
             {formatDate(deadlines.closing)}
           </p>
-          <p className="text-xs text-slate-300">180 days after closing</p>
+          <p className="mt-1 text-xs text-gray-500">180 days after closing</p>
         </div>
       </div>
     </div>

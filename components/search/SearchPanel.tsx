@@ -76,14 +76,14 @@ export function SearchPanel({
   const handleClear = () => setQuery("");
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-8">
       <form
         onSubmit={handleSubmit}
-        className="flex flex-col gap-3 rounded-3xl border border-white/10 bg-white/5 p-4 backdrop-blur"
+        className="flex flex-col gap-4 border border-warm-brown/20 bg-cream p-6"
       >
         <label
           htmlFor={`search-${type}`}
-          className="text-xs font-semibold uppercase tracking-[0.28em] text-amber-300"
+          className="text-xs font-medium uppercase tracking-[0.2em] text-warm-brown"
         >
           Search {type === "property" ? "property types" : `${type}s`}
         </label>
@@ -94,24 +94,24 @@ export function SearchPanel({
             value={query}
             onChange={(event) => setQuery(event.target.value)}
             placeholder={`Search ${type}s`}
-            className="w-full rounded-2xl border border-white/10 bg-slate-950/60 px-4 py-3 text-sm text-white placeholder:text-slate-500 focus:border-amber-300 focus:outline-none focus:ring-2 focus:ring-amber-200/40"
+            className="w-full border border-warm-brown/20 bg-white px-4 py-3 text-sm text-gray-900 placeholder:text-gray-400 focus:border-warm-brown focus:outline-none focus:ring-1 focus:ring-warm-brown"
           />
           {query ? (
             <button
               type="button"
               onClick={handleClear}
-              className="absolute right-3 top-1/2 -translate-y-1/2 rounded-full bg-white/10 px-2 py-1 text-[11px] font-semibold uppercase tracking-[0.25em] text-white hover:bg-white/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
+              className="absolute right-3 top-1/2 -translate-y-1/2 px-2 py-1 text-xs font-medium uppercase tracking-[0.1em] text-warm-brown hover:text-dark-brown focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-warm-brown"
               aria-label="Clear search"
             >
               Clear
             </button>
           ) : null}
         </div>
-        <div className="flex items-center justify-between text-xs text-slate-400">
+        <div className="flex items-center justify-between text-xs text-gray-500">
           <span>{filtered.length} result{filtered.length === 1 ? "" : "s"}</span>
           <button
             type="submit"
-            className="text-amber-200 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
+            className="font-medium text-warm-brown hover:text-dark-brown focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-warm-brown"
           >
             {exactMatchHref ? "Open match" : "Contact us"}
           </button>
@@ -119,7 +119,7 @@ export function SearchPanel({
       </form>
 
       {filtered.length > 0 ? (
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {filtered.map((item) => {
             if (type === "service") {
               return (
@@ -146,17 +146,17 @@ export function SearchPanel({
           })}
         </div>
       ) : (
-        <div className="rounded-3xl border border-white/10 bg-white/5 p-6 text-sm text-slate-200">
-          <p className="text-base font-semibold text-white">{emptyTitle}</p>
-          <p className="mt-2 text-slate-400">{emptyDescription}</p>
+        <div className="border border-warm-brown/20 bg-cream p-8 text-sm">
+          <p className="text-lg font-medium text-gray-900">{emptyTitle}</p>
+          <p className="mt-2 text-gray-600">{emptyDescription}</p>
           <button
             type="button"
             onClick={() =>
               router.push(buildContactHref(query || "Other"))
             }
-            className="mt-4 inline-flex items-center rounded-full bg-amber-300 px-4 py-2 text-xs font-semibold tracking-[0.28em] text-slate-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-900"
+            className="mt-6 inline-flex items-center bg-warm-brown px-6 py-3 text-xs font-semibold uppercase tracking-[0.15em] text-white transition hover:bg-dark-brown focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-warm-brown"
           >
-            CONTACT TEAM
+            Contact Team
           </button>
         </div>
       )}

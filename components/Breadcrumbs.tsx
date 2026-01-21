@@ -14,7 +14,7 @@ export function Breadcrumbs({ items, className, withSchema = true }: Props) {
     <>
       <nav
         aria-label="Breadcrumb"
-        className={className ?? "mb-6 text-sm text-slate-500"}
+        className={className ?? "mb-8 text-sm"}
       >
         <ol className="flex flex-wrap items-center gap-2">
           {items.map((item, index) => (
@@ -22,17 +22,17 @@ export function Breadcrumbs({ items, className, withSchema = true }: Props) {
               {item.href ? (
                 <Link
                   href={item.href}
-                  className="rounded-full px-3 py-1 text-xs font-semibold text-slate-400 transition hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
+                  className="text-xs font-medium uppercase tracking-[0.1em] text-warm-brown/70 transition hover:text-warm-brown focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-warm-brown"
                 >
                   {item.label}
                 </Link>
               ) : (
-                <span className="rounded-full bg-white/5 px-3 py-1 text-xs font-semibold text-white">
+                <span className="text-xs font-medium uppercase tracking-[0.1em] text-gray-900">
                   {item.label}
                 </span>
               )}
               {index < items.length - 1 && (
-                <span className="text-slate-600" aria-hidden="true">
+                <span className="text-warm-brown/40" aria-hidden="true">
                   /
                 </span>
               )}

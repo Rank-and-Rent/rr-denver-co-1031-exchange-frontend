@@ -114,16 +114,16 @@ export default function BootCalculator() {
   ];
 
   return (
-    <div className="tool-card space-y-8 rounded-3xl border border-white/10 bg-white/5 p-6 text-white shadow-2xl">
+    <div className="tool-card space-y-8 bg-cream p-8">
       <div>
-        <h2 className="text-2xl font-semibold text-white">Boot inputs</h2>
-        <p className="text-sm text-slate-300">
+        <h2 className="text-2xl font-medium text-gray-900">Boot inputs</h2>
+        <p className="mt-1 text-sm text-gray-600">
           Values update as you type. Leave the field at zero if it does not apply.
         </p>
       </div>
       <div className="grid gap-6 md:grid-cols-2">
         {fieldMeta.map(({ key, label, helper, placeholder }) => (
-          <label key={key} className="block text-sm font-semibold text-amber-200">
+          <label key={key} className="block text-xs font-medium uppercase tracking-[0.1em] text-warm-brown">
             {label}
             <input
               type="number"
@@ -131,65 +131,65 @@ export default function BootCalculator() {
               value={fields[key]}
               onChange={(event) => handleChange(key, event.target.value)}
               placeholder={placeholder}
-              className="mt-2 w-full rounded-2xl border border-white/10 bg-slate-950/40 px-4 py-3 text-sm text-white placeholder:text-slate-500 focus:border-amber-300 focus:outline-none focus:ring-2 focus:ring-amber-200/40"
+              className="mt-2 w-full border border-warm-brown/20 bg-white px-4 py-3 text-sm text-gray-900 placeholder:text-gray-400 focus:border-warm-brown focus:outline-none focus:ring-1 focus:ring-warm-brown"
             />
-            <span className="mt-1 block text-xs text-slate-400">{helper}</span>
+            <span className="mt-1 block text-xs font-normal normal-case tracking-normal text-gray-500">{helper}</span>
             {errors[key] ? (
-              <span className="mt-1 block text-xs text-red-300">{errors[key]}</span>
+              <span className="mt-1 block text-xs font-normal normal-case tracking-normal text-red-600">{errors[key]}</span>
             ) : null}
           </label>
         ))}
       </div>
 
-      <div className="grid gap-4 md:grid-cols-2">
-        <div className="rounded-2xl border border-white/10 bg-slate-950/40 p-4">
-          <p className="text-xs font-semibold uppercase tracking-[0.3em] text-amber-200">
+      <div className="grid gap-6 md:grid-cols-2">
+        <div className="bg-white p-6">
+          <p className="text-xs font-medium uppercase tracking-[0.15em] text-warm-brown">
             Cash boot
           </p>
-          <p className="text-2xl font-semibold">
+          <p className="mt-2 text-2xl font-medium text-gray-900">
             {results ? currencyFormatter.format(results.cashBoot) : "—"}
           </p>
-          <p className="text-sm text-slate-300">
+          <p className="mt-2 text-sm text-gray-600">
             Cash withheld from exchange proceeds and not reinvested.
           </p>
         </div>
-        <div className="rounded-2xl border border-white/10 bg-slate-950/40 p-4">
-          <p className="text-xs font-semibold uppercase tracking-[0.3em] text-amber-200">
+        <div className="bg-white p-6">
+          <p className="text-xs font-medium uppercase tracking-[0.15em] text-warm-brown">
             Mortgage boot
           </p>
-          <p className="text-2xl font-semibold">
+          <p className="mt-2 text-2xl font-medium text-gray-900">
             {results ? currencyFormatter.format(results.mortgageBoot) : "—"}
           </p>
-          <p className="text-sm text-slate-300">
+          <p className="mt-2 text-sm text-gray-600">
             Mortgage relief when the new loan is smaller than the old loan.
           </p>
         </div>
       </div>
 
-      <div className="rounded-3xl border border-amber-200/30 bg-amber-50/5 p-6 text-white">
-        <p className="text-xs font-semibold uppercase tracking-[0.3em] text-amber-200">
+      <div className="bg-warm-brown p-6 text-white">
+        <p className="text-xs font-medium uppercase tracking-[0.15em] text-white/70">
           Total boot
         </p>
-        <p className="text-3xl font-semibold">
+        <p className="mt-2 text-3xl font-medium">
           {results ? currencyFormatter.format(results.totalBoot) : "—"}
         </p>
-        <p className="text-sm text-slate-200">
+        <p className="mt-2 text-sm text-white/80">
           Total boot is the sum of cash boot and mortgage boot.
         </p>
       </div>
 
-      <div className="rounded-2xl border border-white/10 bg-slate-950/40 p-6">
-        <p className="text-sm font-semibold text-white">Illustrative tax (20%)</p>
-        <p className="text-2xl font-semibold text-amber-200">
+      <div className="bg-white p-6">
+        <p className="text-sm font-medium text-gray-900">Illustrative tax (20%)</p>
+        <p className="mt-2 text-2xl font-medium text-warm-brown">
           {results ? currencyFormatter.format(results.estimatedTax) : "—"}
         </p>
-        <p className="text-xs text-slate-300">
+        <p className="mt-2 text-xs text-gray-500">
           Uses a 20% rate for demonstration. Confirm actual exposure with your tax advisor.
         </p>
       </div>
 
-      <div className="rounded-2xl border border-white/10 bg-white/5 p-6 text-sm text-slate-200">
-        <p className="mb-2 font-semibold text-white">Boot refresher</p>
+      <div className="border-l-4 border-warm-brown bg-white p-6 text-sm text-gray-700">
+        <p className="mb-2 font-medium text-gray-900">Boot refresher</p>
         <p>
           <strong>Cash boot</strong> equals the equity removed from the exchange.{" "}
           <strong>Mortgage boot</strong> occurs when debt decreases. Both amounts are

@@ -35,66 +35,82 @@ This letter is delivered within the forty five day identification period. Please
   };
 
   return (
-    <div className="space-y-4 rounded-3xl border border-white/10 bg-white/5 p-6 text-white">
-      <h3 className="text-xl font-semibold">Identification letter helper</h3>
-      <p className="text-sm text-slate-300">
-        Draft a simple letter for your intermediary. Confirm the final format with your
-        intermediary and counsel.
-      </p>
-      <div className="grid gap-4 md:grid-cols-2">
-        <label className="text-xs font-semibold uppercase tracking-[0.3em] text-amber-200">
-          Investor name
+    <div className="space-y-8 bg-cream p-8">
+      <div>
+        <h2 className="text-2xl font-medium text-warm-brown">Identification Letter Helper</h2>
+        <p className="mt-2 text-sm text-gray-600">
+          Draft a simple letter for your intermediary. Confirm the final format with your
+          intermediary and counsel.
+        </p>
+      </div>
+
+      <div className="grid gap-6 md:grid-cols-2">
+        <div>
+          <label className="block text-xs font-medium uppercase tracking-[0.1em] text-warm-brown">
+            Investor Name
+          </label>
           <input
             value={investor}
             onChange={(event) => setInvestor(event.target.value)}
-            className="mt-2 w-full rounded-2xl border border-white/10 bg-slate-950/40 px-3 py-2 text-sm text-white focus:border-amber-300 focus:outline-none"
+            className="mt-2 w-full border border-warm-brown/20 bg-white px-4 py-3 text-sm text-gray-900 placeholder:text-gray-400 focus:border-warm-brown focus:outline-none focus:ring-1 focus:ring-warm-brown"
             placeholder="Jane Investor"
           />
-        </label>
-        <label className="text-xs font-semibold uppercase tracking-[0.3em] text-amber-200">
-          Intermediary name
+        </div>
+        <div>
+          <label className="block text-xs font-medium uppercase tracking-[0.1em] text-warm-brown">
+            Intermediary Name
+          </label>
           <input
             value={intermediary}
             onChange={(event) => setIntermediary(event.target.value)}
-            className="mt-2 w-full rounded-2xl border border-white/10 bg-slate-950/40 px-3 py-2 text-sm text-white focus:border-amber-300 focus:outline-none"
+            className="mt-2 w-full border border-warm-brown/20 bg-white px-4 py-3 text-sm text-gray-900 placeholder:text-gray-400 focus:border-warm-brown focus:outline-none focus:ring-1 focus:ring-warm-brown"
             placeholder="Example Intermediary"
           />
-        </label>
+        </div>
       </div>
-      <label className="text-xs font-semibold uppercase tracking-[0.3em] text-amber-200 block">
-        Relinquished property
+
+      <div>
+        <label className="block text-xs font-medium uppercase tracking-[0.1em] text-warm-brown">
+          Relinquished Property
+        </label>
         <input
           value={relinquished}
           onChange={(event) => setRelinquished(event.target.value)}
-          className="mt-2 w-full rounded-2xl border border-white/10 bg-slate-950/40 px-3 py-2 text-sm text-white focus:border-amber-300 focus:outline-none"
+          className="mt-2 w-full border border-warm-brown/20 bg-white px-4 py-3 text-sm text-gray-900 placeholder:text-gray-400 focus:border-warm-brown focus:outline-none focus:ring-1 focus:ring-warm-brown"
           placeholder="123 Main St, Denver, CO"
         />
-      </label>
-      <label className="text-xs font-semibold uppercase tracking-[0.3em] text-amber-200 block">
-        Replacement properties (one per line)
+      </div>
+
+      <div>
+        <label className="block text-xs font-medium uppercase tracking-[0.1em] text-warm-brown">
+          Replacement Properties (one per line)
+        </label>
         <textarea
           value={replacementList}
           onChange={(event) => setReplacementList(event.target.value)}
           rows={4}
-          className="mt-2 w-full rounded-2xl border border-white/10 bg-slate-950/40 px-3 py-2 text-sm text-white focus:border-amber-300 focus:outline-none"
+          className="mt-2 w-full border border-warm-brown/20 bg-white px-4 py-3 text-sm text-gray-900 placeholder:text-gray-400 focus:border-warm-brown focus:outline-none focus:ring-1 focus:ring-warm-brown"
           placeholder="Property A&#10;Property B&#10;Property C"
         />
-      </label>
-      <div className="rounded-2xl border border-white/10 bg-slate-950/40 p-4">
-        <pre className="whitespace-pre-wrap text-sm text-slate-200">{template}</pre>
       </div>
+
+      <div className="bg-white p-6">
+        <p className="text-xs font-medium uppercase tracking-[0.15em] text-warm-brown mb-4">Letter Preview</p>
+        <pre className="whitespace-pre-wrap text-sm text-gray-700">{template}</pre>
+      </div>
+
       <div className="flex flex-wrap gap-3">
         <button
           type="button"
           onClick={handleCopy}
-          className="rounded-full border border-white/20 px-4 py-2 text-xs font-semibold uppercase tracking-[0.3em]"
+          className="border border-warm-brown px-6 py-3 text-xs font-medium uppercase tracking-[0.1em] text-warm-brown transition hover:bg-warm-brown hover:text-white focus:outline-none focus:ring-2 focus:ring-warm-brown focus:ring-offset-2"
         >
           Copy
         </button>
         <button
           type="button"
           onClick={handlePrint}
-          className="rounded-full border border-white/20 px-4 py-2 text-xs font-semibold uppercase tracking-[0.3em]"
+          className="border border-warm-brown px-6 py-3 text-xs font-medium uppercase tracking-[0.1em] text-warm-brown transition hover:bg-warm-brown hover:text-white focus:outline-none focus:ring-2 focus:ring-warm-brown focus:ring-offset-2"
         >
           Print
         </button>
@@ -102,4 +118,3 @@ This letter is delivered within the forty five day identification period. Please
     </div>
   );
 }
-

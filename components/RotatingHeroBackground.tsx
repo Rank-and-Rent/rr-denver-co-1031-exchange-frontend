@@ -39,8 +39,8 @@ export function RotatingHeroBackground() {
           />
         </div>
       ))}
-      {/* Dark overlay for better text readability */}
-      <div className="absolute inset-0 bg-gradient-to-br from-[#16324F]/80 via-[#1f4570]/70 to-black/60" />
+      {/* Warm brown overlay for luxury aesthetic */}
+      <div className="absolute inset-0 bg-gradient-to-b from-[#785530]/70 via-[#785530]/60 to-[#4A3520]/80" />
     </div>
   );
 }

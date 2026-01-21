@@ -70,91 +70,83 @@ export default function DebtReliefCalculator() {
   };
 
   return (
-    <div className="space-y-8">
-      <div className="rounded-2xl border border-gray-200 bg-white p-6 shadow-lg">
-        <h2 className="mb-6 font-serif text-2xl font-bold text-[#0B3C5D]">
-          Debt Relief Calculator Inputs
+    <div className="space-y-8 bg-cream p-8">
+      <div>
+        <h2 className="text-2xl font-medium text-warm-brown">
+          Debt Relief Calculator
         </h2>
-        <div className="grid gap-6 md:grid-cols-2">
-          <div>
-            <label
-              htmlFor="old-mortgage"
-              className="mb-2 block text-sm font-medium text-gray-700"
-            >
-              Old Mortgage Balance ($)
-            </label>
-            <input
-              id="old-mortgage"
-              type="text"
-              value={oldMortgage}
-              onChange={(e) => handleInputChange("oldMortgage", e.target.value)}
-              placeholder="500,000"
-              className="w-full rounded-lg border border-gray-300 px-4 py-2 text-gray-900 focus:border-[#0B3C5D] focus:outline-none focus:ring-2 focus:ring-[#0B3C5D]/20"
-            />
-            <p className="mt-1 text-xs text-gray-500">
-              Mortgage balance on relinquished property
-            </p>
-          </div>
-
-          <div>
-            <label
-              htmlFor="new-mortgage"
-              className="mb-2 block text-sm font-medium text-gray-700"
-            >
-              New Mortgage Balance ($)
-            </label>
-            <input
-              id="new-mortgage"
-              type="text"
-              value={newMortgage}
-              onChange={(e) => handleInputChange("newMortgage", e.target.value)}
-              placeholder="400,000"
-              className="w-full rounded-lg border border-gray-300 px-4 py-2 text-gray-900 focus:border-[#0B3C5D] focus:outline-none focus:ring-2 focus:ring-[#0B3C5D]/20"
-            />
-            <p className="mt-1 text-xs text-gray-500">
-              Mortgage balance on replacement property
-            </p>
-          </div>
-
-          <div>
-            <label
-              htmlFor="tax-rate"
-              className="mb-2 block text-sm font-medium text-gray-700"
-            >
-              Estimated Tax Rate (%)
-            </label>
-            <input
-              id="tax-rate"
-              type="text"
-              value={taxRate}
-              onChange={(e) => handleInputChange("taxRate", e.target.value)}
-              placeholder="20"
-              className="w-full rounded-lg border border-gray-300 px-4 py-2 text-gray-900 focus:border-[#0B3C5D] focus:outline-none focus:ring-2 focus:ring-[#0B3C5D]/20"
-            />
-            <p className="mt-1 text-xs text-gray-500">
-              Estimated capital gains tax rate (illustrative only)
-            </p>
-          </div>
-        </div>
-
-        <button
-          onClick={calculateDebtRelief}
-          className="mt-6 w-full rounded-lg bg-[#C9A227] px-6 py-3 font-semibold text-gray-900 transition hover:bg-[#B8921F] focus:outline-none focus:ring-2 focus:ring-[#C9A227] focus:ring-offset-2"
-        >
-          Calculate Debt Relief
-        </button>
+        <p className="mt-2 text-sm text-gray-600">
+          Calculate the potential mortgage boot when your new debt is less than your old debt.
+        </p>
       </div>
 
+      <div className="grid gap-6 md:grid-cols-2">
+        <div>
+          <label className="block text-xs font-medium uppercase tracking-[0.1em] text-warm-brown">
+            Old Mortgage Balance ($)
+          </label>
+          <input
+            type="text"
+            value={oldMortgage}
+            onChange={(e) => handleInputChange("oldMortgage", e.target.value)}
+            placeholder="500,000"
+            className="mt-2 w-full border border-warm-brown/20 bg-white px-4 py-3 text-sm text-gray-900 placeholder:text-gray-400 focus:border-warm-brown focus:outline-none focus:ring-1 focus:ring-warm-brown"
+          />
+          <p className="mt-1 text-xs text-gray-500">
+            Mortgage balance on relinquished property
+          </p>
+        </div>
+
+        <div>
+          <label className="block text-xs font-medium uppercase tracking-[0.1em] text-warm-brown">
+            New Mortgage Balance ($)
+          </label>
+          <input
+            type="text"
+            value={newMortgage}
+            onChange={(e) => handleInputChange("newMortgage", e.target.value)}
+            placeholder="400,000"
+            className="mt-2 w-full border border-warm-brown/20 bg-white px-4 py-3 text-sm text-gray-900 placeholder:text-gray-400 focus:border-warm-brown focus:outline-none focus:ring-1 focus:ring-warm-brown"
+          />
+          <p className="mt-1 text-xs text-gray-500">
+            Mortgage balance on replacement property
+          </p>
+        </div>
+
+        <div>
+          <label className="block text-xs font-medium uppercase tracking-[0.1em] text-warm-brown">
+            Estimated Tax Rate (%)
+          </label>
+          <input
+            type="text"
+            value={taxRate}
+            onChange={(e) => handleInputChange("taxRate", e.target.value)}
+            placeholder="20"
+            className="mt-2 w-full border border-warm-brown/20 bg-white px-4 py-3 text-sm text-gray-900 placeholder:text-gray-400 focus:border-warm-brown focus:outline-none focus:ring-1 focus:ring-warm-brown"
+          />
+          <p className="mt-1 text-xs text-gray-500">
+            Estimated capital gains tax rate (illustrative only)
+          </p>
+        </div>
+      </div>
+
+      <button
+        onClick={calculateDebtRelief}
+        className="w-full bg-warm-brown px-6 py-3 font-medium text-white transition hover:bg-warm-brown/90 focus:outline-none focus:ring-2 focus:ring-warm-brown focus:ring-offset-2"
+      >
+        Calculate Debt Relief
+      </button>
+
       {results && (
-        <div className="rounded-2xl border border-gray-200 bg-white p-6 shadow-lg">
-          <h2 className="mb-6 font-serif text-2xl font-bold text-[#0B3C5D]">
-            Debt Relief Calculation Results
-          </h2>
+        <div className="space-y-6">
+          <h3 className="text-xl font-medium text-warm-brown">
+            Debt Relief Results
+          </h3>
 
           {!results.isValid && results.errors.length > 0 && (
-            <div className="mb-6 rounded-lg border border-red-200 bg-red-50 p-4">
-              <h3 className="mb-2 font-semibold text-red-800">Please correct the following errors:</h3>
-              <ul className="list-disc list-inside space-y-1 text-sm text-red-700">
+            <div className="border-l-4 border-red-500 bg-white p-6">
+              <h4 className="font-medium text-red-800">Please correct the following errors:</h4>
+              <ul className="mt-2 list-disc list-inside space-y-1 text-sm text-red-700">
                 {results.errors.map((error, index) => (
                   <li key={index}>{error}</li>
                 ))}
@@ -166,38 +158,34 @@ export default function DebtReliefCalculator() {
             <div className="space-y-4">
               {results.mortgageBoot > 0 ? (
                 <>
-                  <div className="rounded-lg border border-yellow-200 bg-yellow-50 p-4">
-                    <div className="flex justify-between items-center">
-                      <span className="text-sm font-medium text-gray-700">Mortgage Boot:</span>
-                      <span className="text-lg font-bold text-[#0B3C5D]">
-                        ${results.mortgageBoot.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
-                      </span>
-                    </div>
-                    <p className="mt-1 text-xs text-gray-600">
+                  <div className="bg-white p-6 border-l-4 border-yellow-500">
+                    <p className="text-xs font-medium uppercase tracking-[0.15em] text-warm-brown">Mortgage Boot</p>
+                    <p className="mt-2 text-2xl font-medium text-gray-900">
+                      ${results.mortgageBoot.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                    </p>
+                    <p className="mt-1 text-xs text-gray-500">
                       Taxable boot created when new debt is less than old debt
                     </p>
                   </div>
 
-                  <div className="rounded-lg border-2 border-[#0B3C5D] bg-[#0B3C5D]/5 p-4">
-                    <div className="flex justify-between items-center">
-                      <span className="text-base font-semibold text-gray-900">Estimated Tax on Mortgage Boot:</span>
-                      <span className="text-2xl font-bold text-[#0B3C5D]">
-                        ${results.estimatedTax.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
-                      </span>
-                    </div>
-                    <p className="mt-1 text-xs text-gray-600">
+                  <div className="bg-warm-brown p-6 text-white">
+                    <p className="text-xs font-medium uppercase tracking-[0.15em] text-white/70">Estimated Tax on Mortgage Boot</p>
+                    <p className="mt-2 text-3xl font-medium">
+                      ${results.estimatedTax.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                    </p>
+                    <p className="mt-2 text-sm text-white/80">
                       Estimated tax at {taxRate}% rate (illustrative only - actual rates vary)
                     </p>
                   </div>
                 </>
               ) : (
-                <div className="rounded-lg border border-green-200 bg-green-50 p-4">
+                <div className="bg-white p-6 border-l-4 border-green-500">
                   <div className="flex items-center gap-3">
                     <svg className="h-6 w-6 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
                     <div>
-                      <p className="text-sm font-semibold text-green-800">No Mortgage Boot</p>
+                      <p className="text-sm font-medium text-green-800">No Mortgage Boot</p>
                       <p className="text-xs text-green-700 mt-1">
                         Your new mortgage equals or exceeds the old mortgage. No debt relief boot is created.
                       </p>
@@ -206,14 +194,12 @@ export default function DebtReliefCalculator() {
                 </div>
               )}
 
-              <div className="rounded-lg border border-gray-200 bg-gray-50 p-4">
-                <div className="flex justify-between items-center">
-                  <span className="text-sm font-medium text-gray-700">Debt Difference:</span>
-                  <span className="text-lg font-bold text-[#0B3C5D]">
-                    ${(parseFloat(oldMortgage) - parseFloat(newMortgage)).toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
-                  </span>
-                </div>
-                <p className="mt-1 text-xs text-gray-600">
+              <div className="bg-white p-6">
+                <p className="text-xs font-medium uppercase tracking-[0.15em] text-warm-brown">Debt Difference</p>
+                <p className="mt-2 text-2xl font-medium text-gray-900">
+                  ${(parseFloat(oldMortgage) - parseFloat(newMortgage)).toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                </p>
+                <p className="mt-1 text-xs text-gray-500">
                   Old mortgage minus new mortgage
                 </p>
               </div>
@@ -222,9 +208,9 @@ export default function DebtReliefCalculator() {
         </div>
       )}
 
-      <div className="rounded-lg border border-gray-200 bg-gray-50 p-6">
-        <h3 className="mb-3 font-semibold text-[#0B3C5D]">Understanding Debt Relief and Mortgage Boot</h3>
-        <div className="space-y-2 text-sm text-gray-700">
+      <div className="border-l-4 border-warm-brown bg-white p-6 text-sm text-gray-700">
+        <h3 className="mb-3 font-medium text-warm-brown">Understanding Debt Relief and Mortgage Boot</h3>
+        <div className="space-y-2">
           <p>
             <strong>Mortgage Boot:</strong> When the new mortgage on your replacement property is less than the old mortgage on your relinquished property, the difference is considered "mortgage relief" or "mortgage boot." This creates taxable income even in a 1031 exchange.
           </p>
@@ -245,5 +231,3 @@ export default function DebtReliefCalculator() {
     </div>
   );
 }
-
-

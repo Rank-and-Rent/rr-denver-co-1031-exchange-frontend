@@ -20,6 +20,11 @@ const config: Config = {
         secondaryfg: tokens.secondaryFg,
         outline: tokens.outline,
         panel: tokens.panel,
+        "warm-brown": "#785530",
+        "dark-brown": "#4A3520",
+        cream: "#F5F0E8",
+        "warm-gray": "#A89A8C",
+        "light-cream": "#FAF8F5",
       },
       borderRadius: {
         xl: "1rem",
@@ -28,6 +33,12 @@ const config: Config = {
       },
       boxShadow: {
         glow: "0 20px 60px rgba(0, 0, 0, 0.45)",
+        luxury: "0 4px 30px rgba(120, 85, 48, 0.12)",
+        "luxury-lg": "0 10px 60px rgba(120, 85, 48, 0.15)",
+      },
+      letterSpacing: {
+        luxury: "0.15em",
+        "luxury-wide": "0.25em",
       },
     },
   },

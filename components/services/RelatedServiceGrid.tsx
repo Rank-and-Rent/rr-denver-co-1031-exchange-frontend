@@ -25,11 +25,11 @@ export function RelatedServiceGrid({ services }: RelatedServiceGridProps) {
   const showEmpty = query.trim().length > 0 && filtered.length === 0;
 
   return (
-    <div className="space-y-4 rounded-3xl border border-white/10 bg-white/5 p-6">
-      <div className="flex flex-col gap-2">
+    <div className="space-y-6">
+      <div className="flex flex-col gap-4">
         <label
           htmlFor="related-service-search"
-          className="text-xs font-semibold uppercase tracking-[0.3em] text-amber-300"
+          className="text-xs font-medium uppercase tracking-[0.2em] text-warm-brown"
         >
           Related services
         </label>
@@ -39,13 +39,13 @@ export function RelatedServiceGrid({ services }: RelatedServiceGridProps) {
             value={query}
             onChange={(event) => setQuery(event.target.value)}
             placeholder="Filter related services"
-            className="w-full rounded-2xl border border-white/10 bg-slate-950/40 px-4 py-3 text-sm text-white placeholder:text-slate-500 focus:border-amber-300 focus:outline-none focus:ring-2 focus:ring-amber-200/40"
+            className="w-full border border-warm-brown/20 bg-white px-4 py-3 text-sm text-gray-900 placeholder:text-gray-400 focus:border-warm-brown focus:outline-none focus:ring-1 focus:ring-warm-brown"
           />
           {query ? (
             <button
               type="button"
               onClick={() => setQuery("")}
-              className="absolute right-3 top-1/2 -translate-y-1/2 text-[10px] font-semibold uppercase tracking-[0.3em] text-amber-200"
+              className="absolute right-3 top-1/2 -translate-y-1/2 text-xs font-medium uppercase tracking-[0.1em] text-warm-brown hover:text-dark-brown"
             >
               Clear
             </button>
@@ -53,30 +53,30 @@ export function RelatedServiceGrid({ services }: RelatedServiceGridProps) {
         </div>
       </div>
       {showEmpty ? (
-        <div className="rounded-2xl border border-white/10 bg-slate-950/40 p-4 text-sm text-slate-200">
-          <p className="font-semibold text-white">
-            We can help with “{query}”
+        <div className="bg-white p-6 text-sm">
+          <p className="font-medium text-gray-900">
+            We can help with &quot;{query}&quot;
           </p>
-          <p className="mt-2 text-slate-300">
+          <p className="mt-2 text-gray-600">
             Send the request to intake and we will align the right specialist.
           </p>
           <Link
             href={buildContactHref(query)}
-            className="mt-4 inline-flex items-center rounded-full bg-amber-300 px-4 py-2 text-xs font-semibold uppercase tracking-[0.3em] text-slate-900"
+            className="mt-4 inline-flex items-center bg-warm-brown px-6 py-3 text-xs font-semibold uppercase tracking-[0.15em] text-white transition hover:bg-dark-brown"
           >
             Contact team
           </Link>
         </div>
       ) : (
-        <div className="grid gap-4 md:grid-cols-2">
+        <div className="grid gap-6 md:grid-cols-2">
           {filtered.map((service) => (
             <Link
               key={service.slug}
               href={`/services/${service.slug}`}
-              className="rounded-2xl border border-white/10 bg-slate-950/40 p-4 text-slate-200 transition hover:-translate-y-1 hover:border-amber-200/50"
+              className="group bg-white p-6 transition-all hover:shadow-luxury"
             >
-              <p className="text-sm font-semibold text-white">{service.name}</p>
-              <p className="text-xs text-slate-400">{service.short}</p>
+              <p className="font-medium text-gray-900 group-hover:text-warm-brown">{service.name}</p>
+              <p className="mt-2 text-sm text-gray-500">{service.short}</p>
             </Link>
           ))}
         </div>
@@ -84,4 +84,3 @@ export function RelatedServiceGrid({ services }: RelatedServiceGridProps) {
     </div>
   );
 }
-

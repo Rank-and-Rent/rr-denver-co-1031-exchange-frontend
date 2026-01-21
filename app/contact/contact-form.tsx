@@ -196,12 +196,12 @@ export const ContactForm: React.FC<{ prepopulatedProjectType?: string }> = ({ pr
     <form
       onSubmit={handleSubmit}
       noValidate
-      className="grid gap-6"
+      className="grid gap-5"
       aria-describedby="contact-form-feedback"
     >
       <div className="grid gap-2">
-        <label htmlFor="name" className="text-sm font-medium !text-white">
-          Name <span className="text-[#B42318]">*</span>
+        <label htmlFor="name" className="text-xs font-medium uppercase tracking-[0.1em] text-gray-700">
+          Name <span className="text-red-600">*</span>
         </label>
         <input
           id="name"
@@ -209,20 +209,20 @@ export const ContactForm: React.FC<{ prepopulatedProjectType?: string }> = ({ pr
           type="text"
           value={state.values.name}
           onChange={(event) => handleChange("name", event.target.value)}
-          className="rounded-full border border-slate-200 bg-white px-5 py-3 text-sm text-gray-900 shadow-sm focus:border-[#16324F] focus:outline-none focus:ring-2 focus:ring-[#16324F]/60"
+          className="border border-gray-200 bg-white px-4 py-3 text-sm text-gray-900 transition focus:border-[#785530] focus:outline-none focus:ring-1 focus:ring-[#785530]"
           aria-invalid={Boolean(state.errors.name)}
           aria-describedby={state.errors.name ? "name-error" : undefined}
           required
         />
         {state.errors.name ? (
-          <p id="name-error" className="text-sm text-[#B42318]">
+          <p id="name-error" className="text-xs text-red-600">
             {state.errors.name}
           </p>
         ) : null}
       </div>
 
       <div className="grid gap-2">
-        <label htmlFor="company" className="text-sm font-medium !text-white">
+        <label htmlFor="company" className="text-xs font-medium uppercase tracking-[0.1em] text-gray-700">
           Company
         </label>
         <input
@@ -231,13 +231,13 @@ export const ContactForm: React.FC<{ prepopulatedProjectType?: string }> = ({ pr
           type="text"
           value={state.values.company}
           onChange={(event) => handleChange("company", event.target.value)}
-          className="rounded-full border border-slate-200 bg-white px-5 py-3 text-sm text-gray-900 shadow-sm focus:border-[#16324F] focus:outline-none focus:ring-2 focus:ring-[#16324F]/60"
+          className="border border-gray-200 bg-white px-4 py-3 text-sm text-gray-900 transition focus:border-[#785530] focus:outline-none focus:ring-1 focus:ring-[#785530]"
         />
       </div>
 
       <div className="grid gap-2">
-        <label htmlFor="email" className="text-sm font-medium !text-white">
-          Email <span className="text-[#B42318]">*</span>
+        <label htmlFor="email" className="text-xs font-medium uppercase tracking-[0.1em] text-gray-700">
+          Email <span className="text-red-600">*</span>
         </label>
         <input
           id="email"
@@ -245,21 +245,21 @@ export const ContactForm: React.FC<{ prepopulatedProjectType?: string }> = ({ pr
           type="email"
           value={state.values.email}
           onChange={(event) => handleChange("email", event.target.value)}
-          className="rounded-full border border-slate-200 bg-white px-5 py-3 text-sm text-gray-900 shadow-sm focus:border-[#16324F] focus:outline-none focus:ring-2 focus:ring-[#16324F]/60"
+          className="border border-gray-200 bg-white px-4 py-3 text-sm text-gray-900 transition focus:border-[#785530] focus:outline-none focus:ring-1 focus:ring-[#785530]"
           aria-invalid={Boolean(state.errors.email)}
           aria-describedby={state.errors.email ? "email-error" : undefined}
           required
         />
         {state.errors.email ? (
-          <p id="email-error" className="text-sm text-[#B42318]">
+          <p id="email-error" className="text-xs text-red-600">
             {state.errors.email}
           </p>
         ) : null}
       </div>
 
       <div className="grid gap-2">
-        <label htmlFor="phone" className="text-sm font-medium !text-white">
-          Phone <span className="text-[#B42318]">*</span>
+        <label htmlFor="phone" className="text-xs font-medium uppercase tracking-[0.1em] text-gray-700">
+          Phone <span className="text-red-600">*</span>
         </label>
         <input
           id="phone"
@@ -267,21 +267,21 @@ export const ContactForm: React.FC<{ prepopulatedProjectType?: string }> = ({ pr
           type="tel"
           value={state.values.phone}
           onChange={(event) => handlePhoneChange(event.target.value)}
-          className="rounded-full border border-slate-200 bg-white px-5 py-3 text-sm text-gray-900 shadow-sm focus:border-[#16324F] focus:outline-none focus:ring-2 focus:ring-[#16324F]/60"
+          className="border border-gray-200 bg-white px-4 py-3 text-sm text-gray-900 transition focus:border-[#785530] focus:outline-none focus:ring-1 focus:ring-[#785530]"
           aria-invalid={Boolean(state.errors.phone)}
           aria-describedby={state.errors.phone ? "phone-error" : undefined}
           required
         />
         {state.errors.phone ? (
-          <p id="phone-error" className="text-sm text-[#B42318]">
+          <p id="phone-error" className="text-xs text-red-600">
             {state.errors.phone}
           </p>
         ) : null}
       </div>
 
       <div className="grid gap-2" ref={projectTypeRef}>
-        <label htmlFor="projectType" className="text-sm font-medium !text-white">
-          Project Type <span className="text-[#B42318]">*</span>
+        <label htmlFor="projectType" className="text-xs font-medium uppercase tracking-[0.1em] text-gray-700">
+          Project Type <span className="text-red-600">*</span>
         </label>
         <div className="relative">
           <input
@@ -300,20 +300,20 @@ export const ContactForm: React.FC<{ prepopulatedProjectType?: string }> = ({ pr
               }
               setShowProjectTypeDropdown(true);
             }}
-            className="w-full rounded-full border border-slate-200 bg-white px-5 py-3 text-sm text-gray-900 shadow-sm focus:border-[#16324F] focus:outline-none focus:ring-2 focus:ring-[#16324F]/60"
+            className="w-full border border-gray-200 bg-white px-4 py-3 text-sm text-gray-900 transition focus:border-[#785530] focus:outline-none focus:ring-1 focus:ring-[#785530]"
             aria-invalid={Boolean(state.errors.projectType)}
             aria-describedby={state.errors.projectType ? "projectType-error" : undefined}
             placeholder="Start typing to search..."
             required
           />
           {showProjectTypeDropdown && filteredServices.length > 0 && (
-            <div className="absolute z-50 mt-1 max-h-60 w-full overflow-auto rounded-lg border border-gray-200 bg-white shadow-lg">
+            <div className="absolute z-50 mt-1 max-h-60 w-full overflow-auto border border-gray-200 bg-white shadow-lg">
               {filteredServices.slice(0, 10).map((service) => (
                 <button
                   key={service.slug}
                   type="button"
                   onClick={() => handleProjectTypeSelect(service.name)}
-                  className="w-full px-4 py-2 text-left text-sm text-gray-700 transition hover:bg-gray-50 hover:text-[#16324F]"
+                  className="w-full px-4 py-2 text-left text-sm text-gray-700 transition hover:bg-[#F5F0E8] hover:text-[#785530]"
                 >
                   {service.name}
                 </button>
@@ -322,14 +322,14 @@ export const ContactForm: React.FC<{ prepopulatedProjectType?: string }> = ({ pr
           )}
         </div>
         {state.errors.projectType ? (
-          <p id="projectType-error" className="text-sm text-[#B42318]">
+          <p id="projectType-error" className="text-xs text-red-600">
             {state.errors.projectType}
           </p>
         ) : null}
       </div>
 
       <div className="grid gap-2">
-        <label htmlFor="property" className="text-sm font-medium !text-white">
+        <label htmlFor="property" className="text-xs font-medium uppercase tracking-[0.1em] text-gray-700">
           Property Being Sold
         </label>
         <input
@@ -338,14 +338,14 @@ export const ContactForm: React.FC<{ prepopulatedProjectType?: string }> = ({ pr
           type="text"
           value={state.values.property}
           onChange={(event) => handleChange("property", event.target.value)}
-          className="w-full rounded-full border border-slate-200 bg-white px-5 py-3 text-sm text-gray-900 shadow-sm focus:border-[#16324F] focus:outline-none focus:ring-2 focus:ring-[#16324F]/60"
+          className="w-full border border-gray-200 bg-white px-4 py-3 text-sm text-gray-900 transition focus:border-[#785530] focus:outline-none focus:ring-1 focus:ring-[#785530]"
           placeholder="Include property type, location, and estimated value (optional)"
         />
       </div>
 
-      <div className="grid gap-6 md:grid-cols-2">
+      <div className="grid gap-5 md:grid-cols-2">
         <div className="grid gap-2">
-          <label htmlFor="estimatedCloseDate" className="text-sm font-medium !text-white">
+          <label htmlFor="estimatedCloseDate" className="text-xs font-medium uppercase tracking-[0.1em] text-gray-700">
             Estimated Close Date
           </label>
           <input
@@ -354,11 +354,11 @@ export const ContactForm: React.FC<{ prepopulatedProjectType?: string }> = ({ pr
             type="date"
             value={state.values.estimatedCloseDate}
             onChange={(event) => handleChange("estimatedCloseDate", event.target.value)}
-            className="w-full rounded-full border border-slate-200 bg-white px-5 py-3 text-sm text-gray-900 shadow-sm focus:border-[#16324F] focus:outline-none focus:ring-2 focus:ring-[#16324F]/60"
+            className="w-full border border-gray-200 bg-white px-4 py-3 text-sm text-gray-900 transition focus:border-[#785530] focus:outline-none focus:ring-1 focus:ring-[#785530]"
           />
         </div>
         <div className="grid gap-2">
-          <label htmlFor="city" className="text-sm font-medium !text-white">
+          <label htmlFor="city" className="text-xs font-medium uppercase tracking-[0.1em] text-gray-700">
             City
           </label>
           <input
@@ -367,14 +367,14 @@ export const ContactForm: React.FC<{ prepopulatedProjectType?: string }> = ({ pr
             type="text"
             value={state.values.city}
             onChange={(event) => handleChange("city", event.target.value)}
-            className="w-full rounded-full border border-slate-200 bg-white px-5 py-3 text-sm text-gray-900 shadow-sm focus:border-[#16324F] focus:outline-none focus:ring-2 focus:ring-[#16324F]/60"
+            className="w-full border border-gray-200 bg-white px-4 py-3 text-sm text-gray-900 transition focus:border-[#785530] focus:outline-none focus:ring-1 focus:ring-[#785530]"
             placeholder="Primary metro or submarket (optional)"
           />
         </div>
       </div>
 
       <div className="grid gap-2">
-        <label htmlFor="timeline" className="text-sm font-medium !text-white">
+        <label htmlFor="timeline" className="text-xs font-medium uppercase tracking-[0.1em] text-gray-700">
           Timeline
         </label>
         <select
@@ -382,7 +382,7 @@ export const ContactForm: React.FC<{ prepopulatedProjectType?: string }> = ({ pr
           name="timeline"
           value={state.values.timeline}
           onChange={(event) => handleChange("timeline", event.target.value)}
-          className="rounded-full border border-slate-200 bg-white px-5 py-3 text-sm text-gray-900 shadow-sm focus:border-[#16324F] focus:outline-none focus:ring-2 focus:ring-[#16324F]/60"
+          className="border border-gray-200 bg-white px-4 py-3 text-sm text-gray-900 transition focus:border-[#785530] focus:outline-none focus:ring-1 focus:ring-[#785530]"
         >
           {TIMELINE_OPTIONS.map((option) => (
             <option key={option.value} value={option.value}>
@@ -393,7 +393,7 @@ export const ContactForm: React.FC<{ prepopulatedProjectType?: string }> = ({ pr
       </div>
 
       <div className="grid gap-2">
-        <label htmlFor="details" className="text-sm font-medium !text-white">
+        <label htmlFor="details" className="text-xs font-medium uppercase tracking-[0.1em] text-gray-700">
           Details
         </label>
         <textarea
@@ -401,7 +401,7 @@ export const ContactForm: React.FC<{ prepopulatedProjectType?: string }> = ({ pr
           name="details"
           value={state.values.details}
           onChange={(event) => handleChange("details", event.target.value)}
-          className="min-h-[120px] rounded-3xl border border-slate-200 bg-white px-5 py-3 text-sm text-gray-900 shadow-sm focus:border-[#16324F] focus:outline-none focus:ring-2 focus:ring-[#16324F]/60"
+          className="min-h-[100px] border border-gray-200 bg-white px-4 py-3 text-sm text-gray-900 transition focus:border-[#785530] focus:outline-none focus:ring-1 focus:ring-[#785530]"
           rows={4}
         />
       </div>
@@ -424,19 +424,21 @@ export const ContactForm: React.FC<{ prepopulatedProjectType?: string }> = ({ pr
       <button
         type="submit"
         disabled={state.status === "submitting" || !state.turnstileToken}
-        className="inline-flex items-center justify-center rounded-full bg-[#DAA520] px-6 py-3 text-sm font-semibold tracking-[0.2em] text-gray-900 transition focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#16324F] hover:bg-[#c4911b] disabled:cursor-not-allowed disabled:opacity-60"
+        className="inline-flex items-center justify-center bg-[#785530] px-6 py-4 text-xs font-semibold uppercase tracking-[0.2em] text-white transition hover:bg-[#4A3520] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#785530] focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-60"
       >
-        {state.status === "submitting" ? "SENDING" : "SUBMIT REQUEST"}
+        {state.status === "submitting" ? "Sending..." : "Submit Request"}
       </button>
 
-      <p
-        id="contact-form-feedback"
-        className="text-sm !text-white"
-        role={state.status === "error" || state.status === "success" ? "alert" : undefined}
-      >
-        {state.feedback}
-      </p>
-      <p className="text-xs !text-slate-300">
+      {state.feedback && (
+        <p
+          id="contact-form-feedback"
+          className={`text-sm ${state.status === "success" ? "text-green-700" : "text-red-600"}`}
+          role="alert"
+        >
+          {state.feedback}
+        </p>
+      )}
+      <p className="text-xs text-gray-500">
         Educational content only. Not tax or legal advice.
       </p>
     </form>

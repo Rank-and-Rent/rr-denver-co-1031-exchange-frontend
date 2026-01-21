@@ -4,7 +4,7 @@ import Image from "next/image";
 import Script from "next/script";
 import dynamic from "next/dynamic";
 import React from "react";
-import { Inter, Lora } from "next/font/google";
+import { Inter, Playfair_Display } from "next/font/google";
 import { RevealSection } from "@/components/RevealSection";
 import { LeadForm } from "@/components/LeadForm";
 import { RotatingHeroBackground } from "@/components/RotatingHeroBackground";
@@ -17,13 +17,13 @@ import { HomeLocationSearch } from "@/components/home/HomeLocationSearch";
 const inter = Inter({
   subsets: ["latin"],
   display: "swap",
-  weight: ["400", "500", "600"],
+  weight: ["300", "400", "500", "600"],
 });
 
-const lora = Lora({
+const playfair = Playfair_Display({
   subsets: ["latin"],
   display: "swap",
-  weight: ["600", "700"],
+  weight: ["400", "500", "600", "700"],
 });
 
 type Feature = {
@@ -258,7 +258,7 @@ const IconOutline: React.FC<{
     viewBox="0 0 24 24"
     fill="none"
     role="img"
-    className="h-10 w-10 text-[#DAA520]"
+    className="h-8 w-8 text-warm-brown"
   >
     <title>{title}</title>
     <path
@@ -348,11 +348,6 @@ const faqJsonLd = {
   })),
 };
 
-const skylineSvg =
-  "data:image/svg+xml,%3Csvg width='1200' height='400' viewBox='0 0 1200 400' xmlns='http://www.w3.org/2000/svg'%3E%3ClinearGradient id='g' x1='0' x2='0' y1='0' y2='1'%3E%3Cstop offset='0%25' stop-color='%2316324F' stop-opacity='0.25'/%3E%3Cstop offset='100%25' stop-color='%23FFFFFF' stop-opacity='0'/%3E%3C/linearGradient%3E%3Cpath d='M0 260 L80 220 L140 240 L200 180 L260 210 L320 160 L380 200 L440 150 L520 210 L580 170 L640 240 L720 190 L780 220 L860 200 L920 240 L980 210 L1060 250 L1120 220 L1200 260 L1200 400 L0 400 Z' fill='url(%23g)'/%3E%3C/svg%3E";
-
-const gradientOverlay =
-  "bg-[radial-gradient(circle_at_20%_20%,rgba(218,165,32,0.18),transparent_55%),radial-gradient(circle_at_80%_0%,rgba(255,255,255,0.22),transparent_60%)]";
 
 export default function Page() {
   return (
@@ -372,52 +367,61 @@ export default function Page() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
       />
-      <div className={`bg-white ${inter.className} text-gray-900`}>
+      <div className={`bg-white ${inter.className} text-gray-800`}>
         <main id="main">
-          <section className={`relative overflow-hidden ${gradientOverlay}`}>
+          {/* Hero Section - Full screen with centered text */}
+          <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden">
             <RotatingHeroBackground />
-            <div
-              className="relative mx-auto flex max-w-7xl flex-col gap-14 px-6 py-20 md:px-8 md:py-28 z-10"
-            >
-              <div className="relative flex flex-col gap-8 text-white">
-                <div className="inline-flex items-center gap-3">
-                  <span className="h-2 w-2 rounded-full bg-[#DAA520]" />
-                  <span className="text-xs uppercase tracking-[0.38em]">
-                    Elevated Colorado Guidance
-                  </span>
-                </div>
-                <h1
-                  className={`max-w-3xl text-4xl leading-tight md:text-5xl ${lora.className}`}
+            <div className="relative z-10 mx-auto max-w-5xl px-6 py-32 text-center">
+              <p className="mb-6 text-xs font-medium uppercase tracking-[0.3em] text-white/80">
+                Elevated Colorado Guidance
+              </p>
+              <h1
+                className={`text-4xl font-normal tracking-[0.08em] text-white md:text-6xl lg:text-7xl ${playfair.className}`}
+              >
+                Denver 1031 Exchange Experts
+              </h1>
+              <p className="mx-auto mt-8 max-w-2xl text-lg font-light leading-relaxed text-white/90 md:text-xl">
+                Investors have 45 days to identify replacement properties and 180 days to close. Local advisory keeps every Colorado deadline, intermediary instruction, and closing file on schedule.
+              </p>
+              <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
+                <Link
+                  href={`tel:${PHONE_TEL}`}
+                  className="inline-flex items-center justify-center border border-white bg-white px-8 py-4 text-xs font-semibold uppercase tracking-[0.2em] text-warm-brown transition hover:bg-transparent hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-white"
                 >
-                  Denver 1031 Exchange Experts
-                </h1>
-                <p className="max-w-2xl text-lg text-slate-100 md:text-xl">
-                  Investors have 45 days to identify replacement properties and 180 days to close. Local advisory keeps every Colorado deadline, intermediary instruction, and closing file on schedule.
-                </p>
-                <div className="flex flex-col gap-4 sm:flex-row">
-                  <Link
-                    href={`tel:${PHONE_TEL}`}
-                    className="inline-flex items-center justify-center rounded-full bg-[#DAA520] px-6 py-3 text-sm font-semibold tracking-[0.18em] text-gray-900 transition hover:bg-[#c4911b] focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#16324F] focus-visible:ring-offset-transparent"
-                  >
-                    CALL {PHONE_DISPLAY}
-                  </Link>
-                  <Link
-                    href="#lead-form"
-                    className="inline-flex items-center justify-center rounded-full border border-white/40 px-6 py-3 text-sm font-semibold tracking-[0.18em] text-white transition hover:border-white hover:bg-white/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#DAA520] focus-visible:ring-offset-[#16324F]"
-                  >
-                    START MY EXCHANGE
-                  </Link>
-                </div>
-                <p className="text-sm font-semibold uppercase tracking-[0.28em] text-slate-200">
-                  45 Day identification. 180 Day closing. We help you stay compliant.
-                </p>
+                  Call {PHONE_DISPLAY}
+                </Link>
+                <Link
+                  href="#lead-form"
+                  className="inline-flex items-center justify-center border border-white/50 px-8 py-4 text-xs font-semibold uppercase tracking-[0.2em] text-white transition hover:border-white hover:bg-white hover:text-warm-brown focus:outline-none focus-visible:ring-2 focus-visible:ring-white"
+                >
+                  Start My Exchange
+                </Link>
               </div>
-              <div className="relative grid gap-8 bg-white/10 p-6 backdrop-blur-sm sm:grid-cols-3 z-10">
+              <p className="mt-12 text-xs font-medium uppercase tracking-[0.25em] text-white/70">
+                45 Day identification. 180 Day closing. We help you stay compliant.
+              </p>
+            </div>
+            {/* Scroll indicator */}
+            <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10">
+              <div className="flex flex-col items-center gap-2 text-white/60">
+                <span className="text-xs uppercase tracking-[0.2em]">Scroll</span>
+                <svg className="h-5 w-5 animate-bounce" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+                </svg>
+              </div>
+            </div>
+          </section>
+
+          {/* Trust badges section */}
+          <section className="bg-warm-brown py-8">
+            <div className="mx-auto max-w-7xl px-6">
+              <div className="grid grid-cols-3 gap-4 md:gap-8">
                 {["CPA Alliance", "Attorney Review", "Qualified Intermediary"].map(
                   (badge) => (
                     <div
                       key={badge}
-                      className="flex items-center justify-center rounded-2xl border border-white/20 bg-white/10 px-4 py-3 text-center text-sm font-semibold uppercase tracking-[0.3em] text-white"
+                      className="flex items-center justify-center py-2 text-center text-xs font-medium uppercase tracking-[0.2em] text-white/90 md:text-sm md:tracking-[0.25em]"
                     >
                       {badge}
                     </div>
@@ -427,57 +431,55 @@ export default function Page() {
             </div>
           </section>
 
-          <section
-            id="why-choose"
-            className="bg-white py-20 md:py-28"
-          >
-            <div className="mx-auto flex max-w-7xl flex-col gap-12 px-6 md:px-8">
-              <RevealSection className="flex flex-col gap-6">
-                <span className="text-xs font-semibold uppercase tracking-[0.32em] text-[#16324F]">
+          {/* Why Choose Section - Elegant two-column intro */}
+          <section id="why-choose" className="bg-white py-24 md:py-32">
+            <div className="mx-auto max-w-7xl px-6 md:px-8">
+              <RevealSection className="text-center mb-16">
+                <p className="text-xs font-medium uppercase tracking-[0.3em] text-warm-brown">
                   Why Choose {BRAND_NAME}
-                </span>
-                <h2
-                  className={`max-w-3xl text-3xl md:text-4xl ${lora.className} text-[#16324F]`}
-                >
+                </p>
+                <h2 className={`mt-4 text-3xl tracking-wide text-gray-900 md:text-4xl lg:text-5xl ${playfair.className}`}>
                   Colorado 1031 exchange guidance engineered for precise compliance and investor confidence.
                 </h2>
-                <p className="max-w-3xl text-lg text-gray-700">
+                <p className="mx-auto mt-6 max-w-3xl text-lg font-light leading-relaxed text-gray-600">
                   Our Denver-based team integrates tax law interpretation, real estate underwriting, and transaction management to coordinate every qualified intermediary, attorney, and lender partner across Colorado.
                 </p>
               </RevealSection>
-              <RevealSection className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+              <RevealSection className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
                 {WHY_CHOOSE_FEATURES.map((feature, index) => (
                   <div
                     key={feature.title}
-                    className="group flex h-full flex-col justify-between rounded-2xl border border-gray-200/60 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-lg"
+                    className="group relative bg-cream p-8 transition-all hover:bg-warm-brown"
                   >
-                    <div className="flex items-center gap-4">
-                      <IconOutline
-                        title={feature.title}
-                        path="M4 12h16M12 4v16M6 18l-2 2M18 6l2-2"
-                      />
-                      <p className={`text-lg font-semibold text-[#16324F] ${lora.className}`}>
-                        {feature.title}
-                      </p>
+                    <div className="mb-4">
+                      <span className="text-xs font-semibold tracking-[0.2em] text-warm-brown group-hover:text-white/70">
+                        0{index + 1}
+                      </span>
                     </div>
-                    <p className="mt-4 text-sm leading-relaxed text-gray-700">
+                    <h3 className={`text-xl text-gray-900 group-hover:text-white ${playfair.className}`}>
+                      {feature.title}
+                    </h3>
+                    <p className="mt-4 text-sm leading-relaxed text-gray-600 group-hover:text-white/80">
                       {feature.description}
                     </p>
                     <Link
                       href={feature.href}
-                      className="mt-6 inline-flex items-center text-sm font-semibold text-[#16324F] transition hover:text-[#0f2236] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#16324F]"
+                      className="mt-6 inline-flex items-center gap-2 text-sm font-medium uppercase tracking-[0.15em] text-warm-brown transition group-hover:text-white"
                     >
                       Learn more
+                      <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                      </svg>
                     </Link>
                   </div>
                 ))}
               </RevealSection>
-              <RevealSection className="rounded-2xl border border-slate-200 bg-[#F8FAFB] p-6 md:p-8">
-                <p className="text-sm text-gray-700">
+              <RevealSection className="mt-16 border-l-4 border-warm-brown bg-cream p-8">
+                <p className="text-sm leading-relaxed text-gray-700">
                   A 1031 exchange defers federal and Colorado state income tax on qualifying real property. It does not remove county transfer or recording fees.{" "}
                   <Link
                     href={CO_TRANSFER_TAX_LINK}
-                    className="font-semibold text-[#16324F] underline underline-offset-4"
+                    className="font-semibold text-warm-brown underline underline-offset-4 hover:text-dark-brown"
                   >
                     Review Colorado transfer fee guidance
                   </Link>
@@ -487,74 +489,75 @@ export default function Page() {
             </div>
           </section>
 
-          <section
-            id="how-it-works"
-            className="bg-[#F8FAFB] py-20 md:py-28"
-          >
-            <div className="mx-auto flex max-w-7xl flex-col gap-12 px-6 md:px-8">
-              <RevealSection className="flex flex-col gap-6">
-                <span className="text-xs font-semibold uppercase tracking-[0.32em] text-[#16324F]">
+          {/* How It Works Section - Clean steps with warm brown accent */}
+          <section id="how-it-works" className="bg-cream py-24 md:py-32">
+            <div className="mx-auto max-w-7xl px-6 md:px-8">
+              <RevealSection className="text-center mb-16">
+                <p className="text-xs font-medium uppercase tracking-[0.3em] text-warm-brown">
                   How a 1031 Works
-                </span>
-                <h2
-                  className={`max-w-3xl text-3xl md:text-4xl ${lora.className} text-[#16324F]`}
-                >
+                </p>
+                <h2 className={`mt-4 text-3xl tracking-wide text-gray-900 md:text-4xl lg:text-5xl ${playfair.className}`}>
                   Structure every phase of the exchange with documented reporting and partner oversight.
                 </h2>
-                <p className="max-w-3xl text-lg text-gray-700">
+                <p className="mx-auto mt-6 max-w-3xl text-lg font-light leading-relaxed text-gray-600">
                   We synchronize relinquished property sale activities, qualified intermediary assignments, and replacement closings to maintain Colorado compliance throughout the 180-day lifecycle.
                 </p>
               </RevealSection>
-              <RevealSection className="grid gap-8 md:grid-cols-3">
+              <RevealSection className="grid gap-px bg-warm-brown/20 md:grid-cols-3">
                 {[
                   {
                     title: "Sell the relinquished property",
                     description:
                       "Execute sale agreements, assign them to your qualified intermediary, and ensure proceeds flow directly into escrow.",
                     link: IRS_FORM_8824_LINK,
+                    step: "01",
                   },
                   {
                     title: "Identify replacements within 45 days",
                     description:
                       "Document up to three properties or more under the 200 percent rule with traceable delivery to all parties.",
                     link: IRS_LIKE_KIND_LINK,
+                    step: "02",
                   },
                   {
                     title: "Close within 180 days",
                     description:
                       "Complete financing, due diligence, and closing statements before the IRS deadline to secure tax deferral.",
                     link: IRS_FORM_8824_LINK,
+                    step: "03",
                   },
                 ].map((step) => (
                   <div
                     key={step.title}
-                    className="flex h-full flex-col gap-4 rounded-2xl border border-gray-200/60 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-lg"
+                    className="group flex h-full flex-col bg-white p-10 transition-colors hover:bg-warm-brown"
                   >
-                    <IconOutline
-                      title={step.title}
-                      path="M5 12h14M5 6h14M5 18h14"
-                    />
-                    <p className={`text-xl font-semibold text-[#16324F] ${lora.className}`}>
+                    <span className={`text-5xl font-light text-warm-brown/30 group-hover:text-white/30 ${playfair.className}`}>
+                      {step.step}
+                    </span>
+                    <h3 className={`mt-6 text-xl text-gray-900 group-hover:text-white ${playfair.className}`}>
                       {step.title}
-                    </p>
-                    <p className="text-sm leading-relaxed text-gray-700">
+                    </h3>
+                    <p className="mt-4 flex-grow text-sm leading-relaxed text-gray-600 group-hover:text-white/80">
                       {step.description}
                     </p>
                     <Link
                       href={step.link}
-                      className="mt-auto inline-flex text-sm font-semibold text-[#16324F] transition hover:text-[#0f2236] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#16324F]"
+                      className="mt-6 inline-flex items-center gap-2 text-xs font-medium uppercase tracking-[0.15em] text-warm-brown transition group-hover:text-white"
                     >
                       IRS Guidance
+                      <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                      </svg>
                     </Link>
                   </div>
                 ))}
               </RevealSection>
-              <RevealSection className="rounded-2xl border border-[#16324F]/15 bg-white p-6 md:p-8">
-                <p className="text-sm text-gray-700">
+              <RevealSection className="mt-16 border-l-4 border-warm-brown bg-white p-8">
+                <p className="text-sm leading-relaxed text-gray-700">
                   Vacation and mixed-use properties may qualify under Rev. Proc. 2008-16 safe harbor.{" "}
                   <Link
                     href={IRS_REV_PROC_2008_16_LINK}
-                    className="font-semibold text-[#16324F] underline underline-offset-4"
+                    className="font-semibold text-warm-brown underline underline-offset-4 hover:text-dark-brown"
                   >
                     Review IRS Rev. Proc. 2008-16
                   </Link>
@@ -564,47 +567,42 @@ export default function Page() {
             </div>
           </section>
 
-          <section
-            id="services"
-            className="bg-white py-20 md:py-28"
-          >
-            <div className="mx-auto flex max-w-7xl flex-col gap-12 px-6 md:px-8">
-              <RevealSection className="flex flex-col gap-6">
-                <span className="text-xs font-semibold uppercase tracking-[0.32em] text-[#16324F]">
+          {/* Services Section - Full width with image overlay style like the screenshot */}
+          <section id="services" className="bg-white py-24 md:py-32">
+            <div className="mx-auto max-w-7xl px-6 md:px-8">
+              <RevealSection className="text-center mb-16">
+                <p className="text-xs font-medium uppercase tracking-[0.3em] text-warm-brown">
                   Services Preview
-                </span>
-                <h2
-                  className={`max-w-3xl text-3xl md:text-4xl ${lora.className} text-[#16324F]`}
-                >
+                </p>
+                <h2 className={`mt-4 text-3xl tracking-wide text-gray-900 md:text-4xl lg:text-5xl ${playfair.className}`}>
                   Services designed for Colorado exchanges, from planning through final reporting.
                 </h2>
               </RevealSection>
-            <RevealSection>
-              <HomeServiceSearch services={servicesData} featured={TOP_SERVICES} />
-            </RevealSection>
-              <RevealSection className="flex justify-end">
+              <RevealSection>
+                <HomeServiceSearch services={servicesData} featured={TOP_SERVICES} />
+              </RevealSection>
+              <RevealSection className="mt-12 flex justify-center">
                 <Link
                   href="/services"
-                  className="text-sm font-semibold text-[#16324F] underline decoration-2 underline-offset-4 transition hover:text-[#0f2236] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#16324F]"
+                  className="inline-flex items-center gap-2 border border-warm-brown px-8 py-4 text-xs font-semibold uppercase tracking-[0.2em] text-warm-brown transition hover:bg-warm-brown hover:text-white"
                 >
                   See all services
+                  <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                  </svg>
                 </Link>
               </RevealSection>
             </div>
           </section>
 
-          <section
-            id="property-types"
-            className="bg-[#F8FAFB] py-20 md:py-28"
-          >
-            <div className="mx-auto flex max-w-7xl flex-col gap-12 px-6 md:px-8">
-              <RevealSection className="flex flex-col gap-6">
-                <span className="text-xs font-semibold uppercase tracking-[0.32em] text-[#16324F]">
+          {/* Property Types Section - Grid with hover effect */}
+          <section id="property-types" className="bg-cream py-24 md:py-32">
+            <div className="mx-auto max-w-7xl px-6 md:px-8">
+              <RevealSection className="text-center mb-16">
+                <p className="text-xs font-medium uppercase tracking-[0.3em] text-warm-brown">
                   Property Types
-                </span>
-                <h2
-                  className={`max-w-3xl text-3xl md:text-4xl ${lora.className} text-[#16324F]`}
-                >
+                </p>
+                <h2 className={`mt-4 text-3xl tracking-wide text-gray-900 md:text-4xl lg:text-5xl ${playfair.className}`}>
                   Target the Colorado property classes that align with your reinvestment strategy.
                 </h2>
               </RevealSection>
@@ -615,97 +613,95 @@ export default function Page() {
                     <Link
                       key={property.slug}
                       href={`/property-types/${property.slug}`}
-                      className="group flex h-full flex-col rounded-2xl border border-gray-200/60 bg-white overflow-hidden shadow-sm transition hover:-translate-y-1 hover:shadow-lg"
+                      className="group relative overflow-hidden bg-white"
                     >
                       {propertyType?.heroImage && (
-                        <div className="relative h-48 w-full overflow-hidden">
+                        <div className="relative h-64 w-full overflow-hidden">
                           <Image
                             src={propertyType.heroImage}
                             alt={property.title}
                             fill
-                            className="object-cover transition-transform group-hover:scale-105"
+                            className="object-cover transition-transform duration-500 group-hover:scale-110"
                           />
+                          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
+                          <div className="absolute bottom-0 left-0 right-0 p-6">
+                            <h3 className={`text-xl text-white ${playfair.className}`}>
+                              {property.title}
+                            </h3>
+                          </div>
                         </div>
                       )}
-                      <div className="flex flex-col p-6">
-                        <div className="flex items-center gap-4">
-                          <IconOutline
-                            title={property.title}
-                            path="M3 18h18M3 10l9-6 9 6v8H3z"
-                          />
-                          <h3 className={`text-lg font-semibold text-[#16324F] ${lora.className}`}>
-                            {property.title}
-                          </h3>
-                        </div>
-                        <p className="mt-4 text-sm leading-relaxed text-gray-700">
+                      <div className="p-6">
+                        <p className="text-sm leading-relaxed text-gray-600">
                           {property.description}
                         </p>
-                        <span className="mt-auto mt-6 inline-flex text-sm font-semibold text-[#16324F] transition group-hover:text-[#0f2236]">
+                        <span className="mt-4 inline-flex items-center gap-2 text-xs font-medium uppercase tracking-[0.15em] text-warm-brown">
                           Explore type
+                          <svg className="h-4 w-4 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                          </svg>
                         </span>
                       </div>
                     </Link>
                   );
                 })}
               </RevealSection>
-              <RevealSection className="flex justify-end">
+              <RevealSection className="mt-12 flex justify-center">
                 <Link
                   href="/property-types"
-                  className="text-sm font-semibold text-[#16324F] underline decoration-2 underline-offset-4 transition hover:text-[#0f2236] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#16324F]"
+                  className="inline-flex items-center gap-2 border border-warm-brown px-8 py-4 text-xs font-semibold uppercase tracking-[0.2em] text-warm-brown transition hover:bg-warm-brown hover:text-white"
                 >
-                  Explore property types
+                  Explore all property types
+                  <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                  </svg>
                 </Link>
               </RevealSection>
             </div>
           </section>
 
-          <section
-            id="coverage"
-            className="bg-white py-20 md:py-28"
-          >
-            <div className="mx-auto flex max-w-7xl flex-col gap-12 px-6 md:px-8">
-              <RevealSection className="flex flex-col gap-6">
-                <span className="text-xs font-semibold uppercase tracking-[0.32em] text-[#16324F]">
+          {/* Coverage Section - Explore Communities style */}
+          <section id="coverage" className="bg-white py-24 md:py-32">
+            <div className="mx-auto max-w-7xl px-6 md:px-8">
+              <RevealSection className="text-center mb-16">
+                <p className="text-xs font-medium uppercase tracking-[0.3em] text-warm-brown">
                   Colorado Coverage
-                </span>
-                <h2
-                  className={`max-w-3xl text-3xl md:text-4xl ${lora.className} text-[#16324F]`}
-                >
+                </p>
+                <h2 className={`mt-4 text-3xl tracking-wide text-gray-900 md:text-4xl lg:text-5xl ${playfair.className}`}>
                   Statewide 1031 exchange coverage with Denver metro specialization.
                 </h2>
-                <p className="max-w-3xl text-lg text-gray-700">
+                <p className="mx-auto mt-6 max-w-3xl text-lg font-light leading-relaxed text-gray-600">
                   From the Front Range to the Arkansas Valley, the Rocky Mountain Equity network coordinates qualified intermediaries, attorneys, and local brokers to keep your exchange compliant and on schedule.
                 </p>
               </RevealSection>
-            <RevealSection>
-              <HomeLocationSearch cards={FEATURED_LOCATIONS} locations={locationsData} />
-            </RevealSection>
-            <RevealSection className="flex justify-end">
-              <Link
-                href="/locations"
-                className="text-sm font-semibold text-[#16324F] underline decoration-2 underline-offset-4 transition hover:text-[#0f2236] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#16324F]"
-              >
-                See locations
-              </Link>
-            </RevealSection>
+              <RevealSection>
+                <HomeLocationSearch cards={FEATURED_LOCATIONS} locations={locationsData} />
+              </RevealSection>
+              <RevealSection className="mt-12 flex justify-center">
+                <Link
+                  href="/locations"
+                  className="inline-flex items-center gap-2 border border-warm-brown px-8 py-4 text-xs font-semibold uppercase tracking-[0.2em] text-warm-brown transition hover:bg-warm-brown hover:text-white"
+                >
+                  See all locations
+                  <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                  </svg>
+                </Link>
+              </RevealSection>
             </div>
           </section>
 
-          <section
-            id="tools"
-            className="bg-white py-20 md:py-28"
-          >
-            <div className="mx-auto flex max-w-7xl flex-col gap-12 px-6 md:px-8">
-              <RevealSection className="flex flex-col gap-6">
-                <span className="text-xs font-semibold uppercase tracking-[0.32em] text-[#16324F]">
+          {/* Tools Section - Luxury styled cards with warm brown */}
+          <section id="tools" className="bg-warm-brown py-24 md:py-32">
+            <div className="mx-auto max-w-7xl px-6 md:px-8">
+              <RevealSection className="text-center mb-16">
+                <p className="text-xs font-medium uppercase tracking-[0.3em] text-white/70">
                   Exchange Tools
-                </span>
-                <h2
-                  className={`max-w-3xl text-3xl md:text-4xl ${lora.className} text-[#16324F]`}
-                >
+                </p>
+                <h2 className={`mt-4 text-3xl tracking-wide text-white md:text-4xl lg:text-5xl ${playfair.className}`}>
                   Free calculators and tools to help you plan your 1031 exchange.
                 </h2>
-                <p className="max-w-3xl text-lg text-gray-700">
+                <p className="mx-auto mt-6 max-w-3xl text-lg font-light leading-relaxed text-white/80">
                   Use our interactive tools to calculate boot, estimate exchange costs, validate identification rules, and more.
                 </p>
               </RevealSection>
@@ -757,11 +753,11 @@ export default function Page() {
                   <Link
                     key={tool.href}
                     href={tool.href}
-                    className="group rounded-2xl border border-gray-200/60 bg-gradient-to-br from-[#16324F] to-[#1f4570] p-8 text-white shadow-lg transition hover:-translate-y-1 hover:shadow-xl"
+                    className="group bg-white p-8 transition-all hover:bg-cream"
                   >
-                    <div className="mb-4 flex items-center justify-center rounded-lg bg-white/10 p-3 w-fit">
+                    <div className="mb-6 flex items-center justify-center w-12 h-12 border border-warm-brown/30">
                       <svg
-                        className="h-10 w-10 text-[#DAA520]"
+                        className="h-6 w-6 text-warm-brown"
                         fill="none"
                         viewBox="0 0 24 24"
                         stroke="currentColor"
@@ -774,32 +770,39 @@ export default function Page() {
                         />
                       </svg>
                     </div>
-                    <h3 className={`mb-2 text-2xl font-semibold ${lora.className}`}>
+                    <h3 className={`text-xl text-gray-900 ${playfair.className}`}>
                       {tool.title}
                     </h3>
-                    <p className="text-gray-100">
+                    <p className="mt-3 text-sm leading-relaxed text-gray-600">
                       {tool.description}
                     </p>
+                    <span className="mt-4 inline-flex items-center gap-2 text-xs font-medium uppercase tracking-[0.15em] text-warm-brown">
+                      Use Tool
+                      <svg className="h-4 w-4 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                      </svg>
+                    </span>
                   </Link>
                 ))}
               </RevealSection>
-              <RevealSection className="flex justify-end">
+              <RevealSection className="mt-12 flex justify-center">
                 <Link
                   href="/tools"
-                  className="text-sm font-semibold text-[#16324F] underline decoration-2 underline-offset-4 transition hover:text-[#0f2236] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#16324F]"
+                  className="inline-flex items-center gap-2 border border-white px-8 py-4 text-xs font-semibold uppercase tracking-[0.2em] text-white transition hover:bg-white hover:text-warm-brown"
                 >
                   View All Tools
+                  <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                  </svg>
                 </Link>
               </RevealSection>
             </div>
           </section>
 
-          <section
-            id="resources"
-            className="bg-[#F8FAFB] py-20 md:py-28"
-          >
-            <div className="mx-auto flex max-w-7xl flex-col gap-12 px-6 md:px-8">
-              <RevealSection className="grid gap-6 md:grid-cols-2">
+          {/* Resources Section - Clean two-column layout */}
+          <section id="resources" className="bg-cream py-24 md:py-32">
+            <div className="mx-auto max-w-7xl px-6 md:px-8">
+              <RevealSection className="grid gap-8 md:grid-cols-2">
                 {[
                   {
                     title: "Capital Gains Estimator",
@@ -816,25 +819,28 @@ export default function Page() {
                 ].map((resource) => (
                   <div
                     key={resource.href}
-                    className="flex h-full flex-col justify-between rounded-2xl border border-gray-200/60 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-lg"
+                    className="group flex h-full flex-col bg-white p-10 transition-all hover:shadow-luxury-lg"
                   >
-                    <div className="flex items-center gap-4">
+                    <div className="mb-6 flex items-center justify-center w-12 h-12 border border-warm-brown/30">
                       <IconOutline
                         title={resource.title}
                         path="M12 6v6l4 2M4 4h16v16H4z"
                       />
-                      <h3 className={`text-lg font-semibold text-[#16324F] ${lora.className}`}>
-                        {resource.title}
-                      </h3>
                     </div>
-                    <p className="mt-4 text-sm leading-relaxed text-gray-700">
+                    <h3 className={`text-2xl text-gray-900 ${playfair.className}`}>
+                      {resource.title}
+                    </h3>
+                    <p className="mt-4 flex-grow text-sm leading-relaxed text-gray-600">
                       {resource.description}
                     </p>
                     <Link
                       href={resource.href}
-                      className="mt-6 inline-flex text-sm font-semibold text-[#16324F] transition hover:text-[#0f2236] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#16324F]"
+                      className="mt-6 inline-flex items-center gap-2 text-xs font-medium uppercase tracking-[0.15em] text-warm-brown transition group-hover:text-dark-brown"
                     >
                       Open resource
+                      <svg className="h-4 w-4 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                      </svg>
                     </Link>
                   </div>
                 ))}
@@ -842,34 +848,34 @@ export default function Page() {
             </div>
           </section>
 
-          <section
-            id="faq"
-            className="bg-white py-20 md:py-28"
-          >
-            <div className="mx-auto flex max-w-7xl flex-col gap-12 px-6 md:px-8">
-              <RevealSection className="flex flex-col gap-6">
-                <span className="text-xs font-semibold uppercase tracking-[0.32em] text-[#16324F]">
+          {/* FAQ Section - Clean accordion style */}
+          <section id="faq" className="bg-white py-24 md:py-32">
+            <div className="mx-auto max-w-4xl px-6 md:px-8">
+              <RevealSection className="text-center mb-16">
+                <p className="text-xs font-medium uppercase tracking-[0.3em] text-warm-brown">
                   Frequently Asked Questions
-                </span>
-                <h2
-                  className={`max-w-3xl text-3xl md:text-4xl ${lora.className} text-[#16324F]`}
-                >
+                </p>
+                <h2 className={`mt-4 text-3xl tracking-wide text-gray-900 md:text-4xl lg:text-5xl ${playfair.className}`}>
                   Clear answers for Colorado investors completing a 1031 exchange.
                 </h2>
               </RevealSection>
-              <RevealSection className="divide-y divide-gray-200 rounded-2xl border border-gray-200/60 bg-[#F8FAFB]">
+              <RevealSection className="divide-y divide-warm-brown/20">
                 {FAQ_ENTRIES.map((item, index) => (
                   <details
                     key={item.question}
-                    className="group"
+                    className="group py-6"
                   >
-                    <summary className="flex cursor-pointer items-center justify-between gap-4 px-6 py-5 text-left text-sm font-semibold text-[#16324F] transition hover:bg-white focus:outline-none focus-visible:ring-2 focus-visible:ring-[#16324F] sm:text-base">
-                      <span>{item.question}</span>
-                      <span className="text-xs font-bold tracking-[0.3em] text-[#DAA520]">
-                        {index + 1 < 10 ? `0${index + 1}` : index + 1}
+                    <summary className="flex cursor-pointer items-center justify-between gap-4 text-left transition focus:outline-none focus-visible:ring-2 focus-visible:ring-warm-brown">
+                      <span className={`text-lg text-gray-900 group-open:text-warm-brown ${playfair.className}`}>
+                        {item.question}
+                      </span>
+                      <span className="flex h-8 w-8 shrink-0 items-center justify-center border border-warm-brown/30 text-warm-brown transition group-open:bg-warm-brown group-open:text-white">
+                        <svg className="h-4 w-4 transition-transform group-open:rotate-45" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
+                        </svg>
                       </span>
                     </summary>
-                    <div className="bg-white px-6 pb-6 text-sm leading-relaxed text-gray-700">
+                    <div className="mt-4 text-sm leading-relaxed text-gray-600 pr-12">
                       {item.answer}
                     </div>
                   </details>
@@ -878,45 +884,62 @@ export default function Page() {
             </div>
           </section>
 
-          <section
-            id="lead-form-section"
-            className="bg-[#F8FAFB] py-20 md:py-28"
-          >
-            <div className="mx-auto grid max-w-7xl gap-12 px-6 md:grid-cols-[1.1fr_minmax(0,1fr)] md:px-8">
-              <RevealSection className="flex flex-col gap-6">
-                <span className="text-xs font-semibold uppercase tracking-[0.32em] text-[#16324F]">
+          {/* Lead Form Section - Work With Us style from screenshots */}
+          <section id="lead-form-section" className="relative py-24 md:py-32 overflow-hidden">
+            {/* Background image with overlay */}
+            <div className="absolute inset-0">
+              <Image
+                src="/hero-images/denver-1.jpg"
+                alt="Denver skyline"
+                fill
+                className="object-cover"
+              />
+              <div className="absolute inset-0 bg-warm-brown/90" />
+            </div>
+            <div className="relative z-10 mx-auto grid max-w-7xl gap-12 px-6 md:grid-cols-2 md:px-8">
+              <RevealSection className="flex flex-col justify-center">
+                <p className="text-xs font-medium uppercase tracking-[0.3em] text-white/70">
                   Start Your 1031 Exchange
-                </span>
-                <h2
-                  className={`text-3xl md:text-4xl ${lora.className} text-[#16324F]`}
-                >
+                </p>
+                <h2 className={`mt-4 text-3xl tracking-wide text-white md:text-4xl lg:text-5xl ${playfair.className}`}>
                   Share your transaction goals and we will coordinate the qualified intermediary, attorney, and timeline.
                 </h2>
-                <p className="text-lg text-gray-700">
+                <p className="mt-6 text-lg font-light leading-relaxed text-white/80">
                   Provide your Colorado property details and any reinvestment criteria. A Denver 1031 exchange advisor will respond within one business day.
                 </p>
-                <div className="rounded-2xl border border-gray-200/60 bg-white p-6 shadow-sm">
-                  <p className="text-sm text-gray-700">
-                    Business Hours:
-                  </p>
-                  <p className="text-sm font-semibold text-[#16324F]">
-                    Monday to Friday, 8:00 AM to 6:00 PM Mountain
-                  </p>
-                  <p className="mt-2 text-sm text-gray-700">
-                    Statewide coverage with Denver metro specialists ready to coordinate in-person meetings when required.
-                  </p>
+                <div className="mt-8 flex flex-col gap-4 sm:flex-row">
+                  <Link
+                    href="#lead-form"
+                    className="inline-flex items-center justify-center border border-white bg-white px-8 py-4 text-xs font-semibold uppercase tracking-[0.2em] text-warm-brown transition hover:bg-transparent hover:text-white"
+                  >
+                    Contact
+                  </Link>
+                  <Link
+                    href="/services"
+                    className="inline-flex items-center justify-center border border-white/50 px-8 py-4 text-xs font-semibold uppercase tracking-[0.2em] text-white transition hover:border-white hover:bg-white hover:text-warm-brown"
+                  >
+                    Browse Services
+                  </Link>
                 </div>
               </RevealSection>
-              <RevealSection as="div" className="rounded-3xl border border-gray-200/60 bg-white p-8 shadow-lg">
+              <RevealSection as="div" className="bg-white p-10">
                 <h3
                   id="lead-form"
-                  className={`text-2xl ${lora.className} text-[#16324F]`}
+                  className={`text-2xl text-gray-900 ${playfair.className}`}
                 >
                   Request a Consultation
                 </h3>
-                <p className="mt-2 text-sm text-gray-700">
+                <p className="mt-2 text-sm text-gray-600">
                   Complete the form below and we will confirm timelines, qualified intermediary fit, and documentation requirements.
                 </p>
+                <div className="mt-8 border-t border-warm-brown/20 pt-6">
+                  <p className="text-xs font-medium uppercase tracking-[0.15em] text-warm-brown">
+                    Business Hours
+                  </p>
+                  <p className="mt-1 text-sm text-gray-700">
+                    Monday to Friday, 8:00 AM to 6:00 PM Mountain
+                  </p>
+                </div>
                 <div className="mt-6">
                   <LeadForm />
                 </div>
@@ -924,97 +947,98 @@ export default function Page() {
             </div>
           </section>
         </main>
-        <footer className="bg-[#16324F] text-slate-100">
+        {/* Footer with warm brown styling - keeping all content */}
+        <footer className="bg-dark-brown text-white">
           <div className="mx-auto flex max-w-7xl flex-col gap-10 px-6 py-16 md:grid md:grid-cols-4 md:gap-12 md:px-8">
             <div className="flex flex-col gap-4">
-              <span className="text-xs font-semibold uppercase tracking-[0.32em] text-[#DAA520]">
+              <span className="text-xs font-medium uppercase tracking-[0.25em] text-white/60">
                 {BRAND_NAME}
               </span>
-              <p className={`text-2xl ${lora.className}`}>
+              <p className={`text-2xl text-white ${playfair.className}`}>
                 Rocky Mountain Equity
               </p>
-              <p className="text-sm text-slate-200">
+              <p className="text-sm font-light text-white/70">
                 Trusted Colorado 1031 intermediary coordination, tax documentation, and statewide transaction management.
               </p>
             </div>
             <div className="flex flex-col gap-3">
-              <p className="text-sm font-semibold uppercase tracking-[0.28em] text-[#DAA520]">
+              <p className="text-xs font-medium uppercase tracking-[0.2em] text-white/60">
                 Contact
               </p>
               <Link
                 href={`tel:${PHONE_TEL}`}
-                className="text-sm text-slate-100 transition hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-white"
+                className="text-sm text-white/90 transition hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-white"
               >
                 Call {PHONE_DISPLAY}
               </Link>
               <Link
                 href="mailto:contact@1031exchangedenver.com"
-                className="text-sm text-slate-100 transition hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-white"
+                className="text-sm text-white/90 transition hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-white"
               >
                 contact@1031exchangedenver.com
               </Link>
-              <p className="text-sm text-slate-200">
+              <p className="text-sm text-white/70">
                 1510 York St, Denver, CO 80206
               </p>
             </div>
             <div className="flex flex-col gap-3">
-              <p className="text-sm font-semibold uppercase tracking-[0.28em] text-[#DAA520]">
+              <p className="text-xs font-medium uppercase tracking-[0.2em] text-white/60">
                 Quick Links
               </p>
               <Link
                 href="/services"
-                className="text-sm text-slate-100 transition hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-white"
+                className="text-sm text-white/90 transition hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-white"
               >
                 Services
               </Link>
               <Link
                 href="/property-types"
-                className="text-sm text-slate-100 transition hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-white"
+                className="text-sm text-white/90 transition hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-white"
               >
                 Property Types
               </Link>
               <Link
                 href="/locations"
-                className="text-sm text-slate-100 transition hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-white"
+                className="text-sm text-white/90 transition hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-white"
               >
                 Locations
               </Link>
               <Link
                 href="/resources"
-                className="text-sm text-slate-100 transition hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-white"
+                className="text-sm text-white/90 transition hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-white"
               >
                 Resources
               </Link>
             </div>
             <div className="flex flex-col gap-3">
-              <p className="text-sm font-semibold uppercase tracking-[0.28em] text-[#DAA520]">
+              <p className="text-xs font-medium uppercase tracking-[0.2em] text-white/60">
                 Compliance
               </p>
               <Link
                 href={IRS_FORM_8824_LINK}
-                className="text-sm text-slate-100 underline decoration-2 underline-offset-4 transition hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-white"
+                className="text-sm text-white/90 underline underline-offset-4 transition hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-white"
               >
                 IRS Form 8824
               </Link>
               <Link
                 href={IRS_LIKE_KIND_LINK}
-                className="text-sm text-slate-100 underline decoration-2 underline-offset-4 transition hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-white"
+                className="text-sm text-white/90 underline underline-offset-4 transition hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-white"
               >
                 IRS Like-Kind Property Rules
               </Link>
               <Link
                 href={IRS_REV_PROC_2008_16_LINK}
-                className="text-sm text-slate-100 underline decoration-2 underline-offset-4 transition hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-white"
+                className="text-sm text-white/90 underline underline-offset-4 transition hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-white"
               >
                 Rev. Proc. 2008-16
               </Link>
-              <p className="text-xs text-slate-300">
+              <p className="text-xs text-white/50">
                 Information provided is for educational purposes. Consult your tax advisor and attorney before executing a 1031 exchange.
               </p>
             </div>
           </div>
           <div className="border-t border-white/10">
-            <div className="mx-auto flex max-w-7xl flex-col gap-3 px-6 py-6 text-xs text-slate-300 md:flex-row md:items-center md:justify-between md:px-8">
+            <div className="mx-auto flex max-w-7xl flex-col gap-3 px-6 py-6 text-xs text-white/50 md:flex-row md:items-center md:justify-between md:px-8">
               <p>© {new Date().getFullYear()} {BRAND_NAME}. All rights reserved.</p>
               <p>
                 Privacy Policy · Terms of Service
